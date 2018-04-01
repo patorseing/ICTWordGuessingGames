@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ICT Word Guessing Games</string>
+    <string name="guest">Login as Guest</string>
 </resources>
