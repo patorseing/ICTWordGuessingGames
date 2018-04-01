@@ -47,26 +47,45 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
 
-                <Button
-                    android:id="@+id/fd_login"
-                    android:layout_width="0sp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:background="@color/colorPrimary"
-                    android:padding="5sp"
-                    android:text="continue with FB"
-                    android:textColor="@android:color/white"
-                    android:textSize="15sp"
-                    android:visibility="gone"/>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4"
+                    android:orientation="horizontal">
 
-                <com.facebook.login.widget.LoginButton xmlns:facebook="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/fd_login_bn"
-                    android:layout_width="0sp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:padding="5sp"
-                    android:textSize="15sp"
-                    facebook:com_facebook_login_text="Connect with FB"></com.facebook.login.widget.LoginButton>
+                    <Button
+                        android:id="@+id/fd_login"
+                        android:layout_width="0sp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/colorPrimary"
+                        android:padding="5sp"
+                        android:text="continue with FB"
+                        android:textColor="@android:color/white"
+                        android:textSize="15sp"
+                        android:visibility="gone" />
+
+                    <com.facebook.login.widget.LoginButton
+                        android:id="@+id/fd_login_bn"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:padding="5sp"
+                        android:textSize="15sp"
+                        app:com_facebook_login_text="Connect with FB"></com.facebook.login.widget.LoginButton>
+
+                    <Button
+                        android:id="@+id/out"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/ict"
+                        android:padding="5sp"
+                        android:text="logout"
+                        android:textColor="@android:color/white"
+                        android:textSize="15sp"
+                        android:visibility="gone"/>
+                </LinearLayout>
 
 
                 <TextView
@@ -89,6 +108,7 @@
                     android:layout_weight="1" />
 
                 <Button
+                    android:id="@+id/guest"
                     android:layout_width="0sp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
