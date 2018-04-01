@@ -48,14 +48,25 @@
                     android:layout_weight="1" />
 
                 <Button
+                    android:id="@+id/fd_login"
                     android:layout_width="0sp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:background="@color/ict"
+                    android:background="@color/colorPrimary"
                     android:padding="5sp"
-                    android:text="Facebook login"
+                    android:text="continue with FB"
                     android:textColor="@android:color/white"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"
+                    android:visibility="gone"/>
+
+                <com.facebook.login.widget.LoginButton xmlns:facebook="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/fd_login_bn"
+                    android:layout_width="0sp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:padding="5sp"
+                    android:textSize="15sp"
+                    facebook:com_facebook_login_text="Connect with FB"></com.facebook.login.widget.LoginButton>
 
 
                 <TextView
