@@ -69,6 +69,7 @@ public class OpeningMenu extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Loggin in ..." , Toast.LENGTH_SHORT).show();
                 textView.setText("Login Success \n" + loginResult.getAccessToken().getUserId()+"\n"+loginResult.getAccessToken().getToken());
                 //visibility
+                loginButton.setVisibility(View.GONE);
                 logOut.setVisibility(View.VISIBLE);
                 logOut.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -76,6 +77,7 @@ public class OpeningMenu extends AppCompatActivity {
                         LoginManager.getInstance().logOut();
                         textView.setText("Logout");
                         logOut.setVisibility(View.GONE);
+                        loginButton.setVisibility(View.VISIBLE);
                     }
                 });
             }
