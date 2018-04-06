@@ -34,7 +34,6 @@ public class OpeningMenu extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
 
         //FacebookSdk.sdkInitialize(getApplicationContext());
@@ -46,7 +45,6 @@ public class OpeningMenu extends AppCompatActivity {
         textView = (TextView)findViewById(R.id.result);
         logOut = (Button) findViewById(R.id.out);
         callbackManager = CallbackManager.Factory.create();
-
 
         accessTokenTracker = new AccessTokenTracker() {
             @Override
@@ -72,15 +70,7 @@ public class OpeningMenu extends AppCompatActivity {
                 Profile profile = Profile.getCurrentProfile();
                 nextActivity(profile);
                 Toast.makeText(getApplicationContext(), "Loggin in ..." , Toast.LENGTH_SHORT).show();
-                String userId = loginResult.getAccessToken().getUserId();
-                String token = loginResult.getAccessToken().getToken();
-
-                textView.setText("User ID:  " +
-                        userId + "\n" +
-                        "Auth Token: " + token);
-
-
-
+                textView.setText("Login Success \n" + loginResult.getAccessToken().getUserId()+"\n"+loginResult.getAccessToken().getToken());
                 //visibility
                 loginButton.setVisibility(View.GONE);
                 logOut.setVisibility(View.VISIBLE);
