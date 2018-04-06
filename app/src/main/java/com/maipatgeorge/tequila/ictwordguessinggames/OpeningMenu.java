@@ -20,6 +20,8 @@ import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
+import java.util.UUID;
+
 public class OpeningMenu extends AppCompatActivity {
 
     LoginButton loginButton;
@@ -28,9 +30,11 @@ public class OpeningMenu extends AppCompatActivity {
     AccessTokenTracker accessTokenTracker;
     ProfileTracker profileTracker;
     Button logOut;
+    Button asGuest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
 
         //FacebookSdk.sdkInitialize(getApplicationContext());
@@ -42,6 +46,7 @@ public class OpeningMenu extends AppCompatActivity {
         textView = (TextView)findViewById(R.id.result);
         logOut = (Button) findViewById(R.id.out);
         callbackManager = CallbackManager.Factory.create();
+
 
         accessTokenTracker = new AccessTokenTracker() {
             @Override
@@ -67,7 +72,18 @@ public class OpeningMenu extends AppCompatActivity {
                 Profile profile = Profile.getCurrentProfile();
                 nextActivity(profile);
                 Toast.makeText(getApplicationContext(), "Loggin in ..." , Toast.LENGTH_SHORT).show();
-                textView.setText("Login Success \n" + loginResult.getAccessToken().getUserId()+"\n"+loginResult.getAccessToken().getToken());
+                String userId = loginResult.getAccessToken().getUserId();
+                String token = loginResult.getAccessToken().getToken();
+
+                textView.setText("User ID:  " +
+                        userId + "\n" +
+                        "Auth Token: " + token);
+
+                String imageUrl = String.format("https://graph.facebook.com/%s/picture?type=large", userId);
+                String name = profile.getName();
+
+                Toast.makeText(getApplicationContext(), "FB user add successful", Toast.LENGTH_SHORT).show();
+
                 //visibility
                 loginButton.setVisibility(View.GONE);
                 logOut.setVisibility(View.VISIBLE);
@@ -90,6 +106,18 @@ public class OpeningMenu extends AppCompatActivity {
             @Override
             public void onError(FacebookException error) {
 
+            }
+        });
+
+        asGuest = findViewById(R.id.guest);
+
+        asGuest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String name;
+                UUID uuid = UUID.randomUUID();
+                name = uuid.toString().replace("-", "").substring(0, 15);
+                textView.setText(name);
             }
         });
     }
