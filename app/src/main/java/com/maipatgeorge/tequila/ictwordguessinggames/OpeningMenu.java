@@ -79,10 +79,7 @@ public class OpeningMenu extends AppCompatActivity {
                         userId + "\n" +
                         "Auth Token: " + token);
 
-                String imageUrl = String.format("https://graph.facebook.com/%s/picture?type=large", userId);
-                String name = profile.getName();
 
-                Toast.makeText(getApplicationContext(), "FB user add successful", Toast.LENGTH_SHORT).show();
 
                 //visibility
                 loginButton.setVisibility(View.GONE);
