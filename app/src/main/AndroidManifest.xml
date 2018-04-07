@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.maipatgeorge.tequila.ictwordguessinggames">
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/logo"
@@ -16,11 +18,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".OpeningMenu">
+        <activity android:name=".OpeningMenu" />
 
-        </activity>
-        <meta-data android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id"/>
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+
+        <activity
+            android:name=".StartGameGame"
+            android:label="@string/title_activity_start_game_game"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".StartGame"
+            android:label="@string/title_activity_start_game"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

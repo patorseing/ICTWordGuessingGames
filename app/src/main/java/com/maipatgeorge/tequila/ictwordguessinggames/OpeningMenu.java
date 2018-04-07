@@ -1,7 +1,10 @@
 package com.maipatgeorge.tequila.ictwordguessinggames;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -19,8 +22,11 @@ import com.facebook.ProfileTracker;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.maipatgeorge.tequila.ictwordguessinggames.DB.DBHelper;
 
 import java.util.UUID;
+
+import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_NAME;
 
 public class OpeningMenu extends AppCompatActivity {
 
@@ -32,6 +38,8 @@ public class OpeningMenu extends AppCompatActivity {
     Button logOut;
     Button asGuest;
 
+    DBHelper helper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +48,8 @@ public class OpeningMenu extends AppCompatActivity {
         FacebookSdk.getApplicationContext();
 
         setContentView(R.layout.activity_opening_menu);
+
+        helper = new DBHelper(this);
 
         loginButton = (LoginButton)findViewById(R.id.fd_login_bn);
         textView = (TextView)findViewById(R.id.result);
@@ -70,7 +80,9 @@ public class OpeningMenu extends AppCompatActivity {
                 Profile profile = Profile.getCurrentProfile();
                 nextActivity(profile);
                 Toast.makeText(getApplicationContext(), "Loggin in ..." , Toast.LENGTH_SHORT).show();
+
                 textView.setText("Login Success \n" + loginResult.getAccessToken().getUserId()+"\n"+loginResult.getAccessToken().getToken());
+
                 //visibility
                 loginButton.setVisibility(View.GONE);
                 logOut.setVisibility(View.VISIBLE);
@@ -105,6 +117,19 @@ public class OpeningMenu extends AppCompatActivity {
                 UUID uuid = UUID.randomUUID();
                 name = uuid.toString().replace("-", "").substring(0, 15);
                 textView.setText(name);
+                SQLiteDatabase db = helper.getWritableDatabase();
+                ContentValues values = new ContentValues();
+                values.put(KEY_NAME, name);
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent welcome = new Intent(OpeningMenu.this, StartGame.class);
+                        startActivity(welcome);
+                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                        finish();
+                    }
+                }, 10);
             }
         });
     }
