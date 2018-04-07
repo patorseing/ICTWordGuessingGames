@@ -23,6 +23,7 @@ import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.maipatgeorge.tequila.ictwordguessinggames.DB.DBHelper;
+import com.maipatgeorge.tequila.ictwordguessinggames.DB.model.Guest;
 
 import java.util.UUID;
 
@@ -120,6 +121,9 @@ public class OpeningMenu extends AppCompatActivity {
                 SQLiteDatabase db = helper.getWritableDatabase();
                 ContentValues values = new ContentValues();
                 values.put(KEY_NAME, name);
+
+                Guest guest = new Guest();
+                guest.setName(name);
 
                 new Handler().postDelayed(new Runnable() {
                     @Override
