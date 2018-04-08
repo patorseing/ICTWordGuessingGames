@@ -17,17 +17,21 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
 import com.facebook.Profile;
 import com.facebook.ProfileTracker;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.maipatgeorge.tequila.ictwordguessinggames.DB.DBHelper;
-import com.maipatgeorge.tequila.ictwordguessinggames.DB.model.Guest;
+
+import org.json.JSONObject;
 
 import java.util.UUID;
 
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_NAME;
+import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.TABLE_Guest;
 
 public class OpeningMenu extends AppCompatActivity {
 
@@ -78,11 +82,29 @@ public class OpeningMenu extends AppCompatActivity {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 logOut.setVisibility(View.GONE);
-                Profile profile = Profile.getCurrentProfile();
-                nextActivity(profile);
                 Toast.makeText(getApplicationContext(), "Loggin in ..." , Toast.LENGTH_SHORT).show();
 
-                textView.setText("Login Success \n" + loginResult.getAccessToken().getUserId()+"\n"+loginResult.getAccessToken().getToken());
+                //String userId = loginResult.getAccessToken().getUserId();
+                //String token = loginResult.getAccessToken().getToken();
+
+                //textView.setText("Login Success \n" +userId+"\n"+token);
+                //textView.setText(profile.getId());
+
+                GraphRequest.newMeRequest(
+                        loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
+                            @Override
+                            public void onCompleted(JSONObject me, GraphResponse response) {
+                                if (response.getError() != null) {
+                                    // handle error
+                                } else {
+                                    String fbUserId = me.optString("id");
+                                    String fbUserFirstName = me.optString("name");
+                                    String fbUserProfilePics = "http://graph.facebook.com/" + fbUserId + "/picture?type=large";
+                                    // send email and id to your web server
+                                    textView.setText("Login Success \n" +fbUserId+"\n"+fbUserFirstName+"\n"+fbUserProfilePics);
+                                }
+                            }
+                        }).executeAsync();
 
                 //visibility
                 loginButton.setVisibility(View.GONE);
@@ -121,9 +143,8 @@ public class OpeningMenu extends AppCompatActivity {
                 SQLiteDatabase db = helper.getWritableDatabase();
                 ContentValues values = new ContentValues();
                 values.put(KEY_NAME, name);
-
-                Guest guest = new Guest();
-                guest.setName(name);
+                db.insertOrThrow(TABLE_Guest, null, values);
+                db.close();
 
                 new Handler().postDelayed(new Runnable() {
                     @Override
