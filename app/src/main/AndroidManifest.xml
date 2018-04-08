@@ -25,10 +25,6 @@
             android:value="@string/facebook_app_id" />
 
         <activity
-            android:name=".StartGameGame"
-            android:label="@string/title_activity_start_game_game"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".StartGame"
             android:label="@string/title_activity_start_game"
             android:theme="@style/AppTheme.NoActionBar" />

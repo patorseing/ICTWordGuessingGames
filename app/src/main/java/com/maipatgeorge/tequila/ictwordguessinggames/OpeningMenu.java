@@ -30,7 +30,10 @@ import org.json.JSONObject;
 
 import java.util.UUID;
 
+import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_FBID;
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_NAME;
+import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_TOKEN;
+import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.TABLE_Fbuser;
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.TABLE_Guest;
 
 public class OpeningMenu extends AppCompatActivity {
@@ -80,12 +83,9 @@ public class OpeningMenu extends AppCompatActivity {
 
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
-            public void onSuccess(LoginResult loginResult) {
+            public void onSuccess(final LoginResult loginResult) {
                 logOut.setVisibility(View.GONE);
                 Toast.makeText(getApplicationContext(), "Loggin in ..." , Toast.LENGTH_SHORT).show();
-
-                //String userId = loginResult.getAccessToken().getUserId();
-                //String token = loginResult.getAccessToken().getToken();
 
                 //textView.setText("Login Success \n" +userId+"\n"+token);
                 //textView.setText(profile.getId());
@@ -97,11 +97,32 @@ public class OpeningMenu extends AppCompatActivity {
                                 if (response.getError() != null) {
                                     // handle error
                                 } else {
+                                    String token = loginResult.getAccessToken().getToken();
                                     String fbUserId = me.optString("id");
-                                    String fbUserFirstName = me.optString("name");
+                                    String fbUserName = me.optString("name");
                                     String fbUserProfilePics = "http://graph.facebook.com/" + fbUserId + "/picture?type=large";
-                                    // send email and id to your web server
-                                    textView.setText("Login Success \n" +fbUserId+"\n"+fbUserFirstName+"\n"+fbUserProfilePics);
+                                    textView.setText("Login Success \n" +fbUserId+"\n"+fbUserName+"\n"+fbUserProfilePics);
+
+
+                                    SQLiteDatabase db = helper.getWritableDatabase();
+                                    ContentValues values = new ContentValues();
+                                    values.put(KEY_FBID, fbUserId);
+                                    values.put(KEY_NAME, fbUserName);
+                                    values.put(KEY_TOKEN, token);
+                                    db.insertOrThrow(TABLE_Fbuser, null, values);
+                                    //db.close();
+
+                                    /*
+                                    new Handler().postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Intent welcome = new Intent(OpeningMenu.this, StartGame.class);
+                                            startActivity(welcome);
+                                            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                                            finish();
+                                        }
+                                    }, 10);
+                                    */
                                 }
                             }
                         }).executeAsync();

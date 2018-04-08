@@ -4,8 +4,11 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_FBID;
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_ID;
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_NAME;
+import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_TOKEN;
+import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.TABLE_Fbuser;
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.TABLE_Guest;
 
 public class DBHelper extends SQLiteOpenHelper {
@@ -14,7 +17,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String LOG = "DBHelper";
 
     // Database Version
-    private static final int DB_VERSION = 1;
+    private static final int DB_VERSION = 4;
 
     // Database Name
     private static final String DB_NAME = "ICT_game.db";
@@ -24,13 +27,13 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String CREATE_TABLE_GUEST = "CREATE TABLE "
             + TABLE_Guest + "(" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + KEY_NAME + " TEXT);";
 
-    /*
+
     //FBUSER table create statement
     private static final String CREATE_TABLE_FB_USER = "CREATE TABLE "
-            + TABLE_Fbuser + "(" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_FBID +"INTEGER, "
-            + KEY_NAME+" TEXT)";
+            + TABLE_Fbuser + "(" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + KEY_FBID +" TEXT, "
+            + KEY_NAME+" TEXT,"+KEY_TOKEN+" TEXT)";
 
-
+    /*
     //Category table create statement
     private static final String CREATE_TABLE_CATEGORY = "CREATE TABLE "
             + TABLE_Category + "(" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_CAT +" TEXT)";
@@ -61,7 +64,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         // creating required tables
         db.execSQL(CREATE_TABLE_GUEST);
-        //db.execSQL(CREATE_TABLE_FB_USER);
+        db.execSQL(CREATE_TABLE_FB_USER);
         //db.execSQL(CREATE_TABLE_CATEGORY);
         //db.execSQL(CREATE_TABLE_LEVEL);
         //db.execSQL(CREATE_TABLE_FbuserPass);
@@ -72,7 +75,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // on upgrade drop older tables
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_Guest);
-        //db.execSQL("DROP TABLE IF EXISTS " + TABLE_Fbuser);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_Fbuser);
         //db.execSQL("DROP TABLE IF EXISTS " + TABLE_Category);
         //db.execSQL("DROP TABLE IF EXISTS " + TABLE_Level);
         //db.execSQL("DROP TABLE IF EXISTS " + TABLE_FbuserPass);
