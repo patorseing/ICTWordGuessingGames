@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -165,6 +166,16 @@ public class OpeningMenu extends AppCompatActivity {
                 values.put(KEY_NAME, name);
                 db.insertOrThrow(TABLE_Guest, null, values);
                 db.close();
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent welcome = new Intent(OpeningMenu.this, GuestStartGame.class);
+                        startActivity(welcome);
+                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                        finish();
+                    }
+                }, 10);
             }
         });
     }
