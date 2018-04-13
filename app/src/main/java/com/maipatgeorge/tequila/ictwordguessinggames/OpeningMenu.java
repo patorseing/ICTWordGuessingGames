@@ -93,16 +93,13 @@ public class OpeningMenu extends AppCompatActivity {
                 GraphRequest.newMeRequest(
                         loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
                             @Override
-                            public void onCompleted(JSONObject me, GraphResponse response) {
+                            public void onCompleted(final JSONObject me, GraphResponse response) {
                                 if (response.getError() != null) {
                                     // handle error
                                 } else {
                                     String token = loginResult.getAccessToken().getToken();
-                                    String fbUserId = me.optString("id");
-                                    String fbUserName = me.optString("name");
-                                    String fbUserProfilePics = "http://graph.facebook.com/" + fbUserId + "/picture?type=large";
-                                    textView.setText("Login Success \n" +fbUserId+"\n"+fbUserName+"\n"+fbUserProfilePics);
-
+                                    final String fbUserId = me.optString("id");
+                                    final String fbUserName = me.optString("name");
 
                                     SQLiteDatabase db = helper.getWritableDatabase();
                                     ContentValues values = new ContentValues();
@@ -116,6 +113,8 @@ public class OpeningMenu extends AppCompatActivity {
                                         @Override
                                         public void run() {
                                             Intent welcome = new Intent(OpeningMenu.this, FBuserStartGame.class);
+                                            welcome.putExtra("name", fbUserName);
+                                            welcome.putExtra("id", fbUserId);
                                             startActivity(welcome);
                                             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                                             finish();
@@ -155,9 +154,8 @@ public class OpeningMenu extends AppCompatActivity {
         asGuest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String name;
-                UUID uuid = UUID.randomUUID();
-                name = uuid.toString().replace("-", "").substring(0, 15);
+                final UUID uuid = UUID.randomUUID();
+                final String name = uuid.toString().replace("-", "").substring(0, 15);
                 textView.setText(name);
                 SQLiteDatabase db = helper.getWritableDatabase();
                 ContentValues values = new ContentValues();
@@ -169,6 +167,7 @@ public class OpeningMenu extends AppCompatActivity {
                     @Override
                     public void run() {
                         Intent welcome = new Intent(OpeningMenu.this, GuestStartGame.class);
+                        welcome.putExtra("name", name);
                         startActivity(welcome);
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         finish();

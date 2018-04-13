@@ -11,11 +11,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-import com.facebook.login.LoginManager;
+import com.squareup.picasso.Picasso;
 
 public class FBuserStartGame extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    NavigationView navigationView;
+    TextView name;
+    ImageView profilePictureView;
+
+
+    Intent intent;
+    Bundle bd;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +34,25 @@ public class FBuserStartGame extends AppCompatActivity
         setContentView(R.layout.activity_fbuser_start_game);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        profilePictureView = navigationView.getHeaderView(0).findViewById(R.id.imageViewFB);
+        name = navigationView.getHeaderView(0).findViewById(R.id.fbname);
+
+
+        intent = getIntent();
+        bd = intent.getExtras();
+
+
+        if(bd != null)
+        {
+            String getName = (String) bd.get("name");
+            String id = (String) bd.get("id");
+            name.setText(getName);
+
+            //Picasso.with(this).load( "https://graph.facebook.com/"+id+"/picture?type=small").into((Target) profilePictureView);
+            Picasso.with(this).load("https://graph.facebook.com/"+id+"/picture?type=large").into(profilePictureView);
+        }
 
         /*
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -86,7 +116,7 @@ public class FBuserStartGame extends AppCompatActivity
         if (id == R.id.nav_settingFB) {
             // Handle the camera action
         } else if (id == R.id.nav_out) {
-            LoginManager.getInstance().logOut();
+            //LoginManager.getInstance().logOut();
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {

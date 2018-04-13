@@ -23,7 +23,8 @@ public class GuestStartGame extends AppCompatActivity
     NavigationView navigationView;
     TextView name;
     DBHelper helper;
-    TextView res;
+    Intent intent;
+    Bundle bd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,11 +36,16 @@ public class GuestStartGame extends AppCompatActivity
         imageView = navigationView.getHeaderView(0).findViewById(R.id.imageView);
         imageView.setImageResource(R.drawable.profile_image_web);
         name = navigationView.getHeaderView(0).findViewById(R.id.guestname);
-        res = (TextView) findViewById(R.id.result2);
-        res.setText("good");
         helper = new DBHelper(this);
 
-        name.setText("ICT");
+        intent = getIntent();
+        bd = intent.getExtras();
+
+        if(bd != null)
+        {
+            String getName = (String) bd.get("name");
+            name.setText(getName);
+        }
 
         /*
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
