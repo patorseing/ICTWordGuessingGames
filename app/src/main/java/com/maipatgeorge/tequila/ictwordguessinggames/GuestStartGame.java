@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -97,6 +98,57 @@ public class GuestStartGame extends AppCompatActivity
                 db.insertOrThrow(TABLE_Category, null, values);
             }
         }
+
+        wl_guest = (Button) findViewById(R.id.guest_wl);
+
+        wl_guest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent welcome = new Intent(GuestStartGame.this, GuestWL.class);
+                        startActivity(welcome);
+                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                        finish();
+                    }
+                }, 10);
+            }
+        });
+
+        se_guest = (Button) findViewById(R.id.guest_sec);
+
+        se_guest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent welcome = new Intent(GuestStartGame.this, GuestSEC.class);
+                        startActivity(welcome);
+                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                        finish();
+                    }
+                }, 10);
+            }
+        });
+
+        db_guest = (Button) findViewById(R.id.guest_db);
+
+        db_guest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent welcome = new Intent(GuestStartGame.this, GuestDB.class);
+                        startActivity(welcome);
+                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                        finish();
+                    }
+                }, 10);
+            }
+        });
     }
 
     @Override
