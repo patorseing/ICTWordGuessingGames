@@ -27,7 +27,6 @@ public class FBuserStartGame extends AppCompatActivity
     Intent intent;
     Bundle bd;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -2,6 +2,7 @@ package com.maipatgeorge.tequila.ictwordguessinggames;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
@@ -31,6 +32,7 @@ import org.json.JSONObject;
 import java.util.UUID;
 
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_FBID;
+import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_ID;
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_NAME;
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_TOKEN;
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.TABLE_Fbuser;
@@ -45,6 +47,7 @@ public class OpeningMenu extends AppCompatActivity {
     ProfileTracker profileTracker;
     Button logOut;
     Button asGuest;
+    Button asOldGuest;
 
     DBHelper helper;
 
@@ -101,25 +104,46 @@ public class OpeningMenu extends AppCompatActivity {
                                     final String fbUserId = me.optString("id");
                                     final String fbUserName = me.optString("name");
 
-                                    SQLiteDatabase db = helper.getWritableDatabase();
-                                    ContentValues values = new ContentValues();
-                                    values.put(KEY_FBID, fbUserId);
-                                    values.put(KEY_NAME, fbUserName);
-                                    values.put(KEY_TOKEN, token);
-                                    db.insertOrThrow(TABLE_Fbuser, null, values);
-                                    db.close();
+                                    String fbcount = "SELECT * FROM "+TABLE_Fbuser+" WHERE "+KEY_FBID+" = ? ";
 
-                                    new Handler().postDelayed(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            Intent welcome = new Intent(OpeningMenu.this, FBuserStartGame.class);
-                                            welcome.putExtra("name", fbUserName);
-                                            welcome.putExtra("id", fbUserId);
-                                            startActivity(welcome);
-                                            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                                            finish();
-                                        }
-                                    }, 10);
+                                    SQLiteDatabase db1 = helper.getReadableDatabase();
+
+                                    Cursor cursor = db1.rawQuery(fbcount, new String[] {fbUserId});
+
+                                    if (cursor.getCount() > 0){
+                                        new Handler().postDelayed(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                Intent welcome = new Intent(OpeningMenu.this, FBuserStartGame.class);
+                                                welcome.putExtra("name", fbUserName);
+                                                welcome.putExtra("id", fbUserId);
+                                                startActivity(welcome);
+                                                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                                                finish();
+                                            }
+                                        }, 10);
+                                    }
+                                    else {
+                                        SQLiteDatabase db2 = helper.getWritableDatabase();
+                                        ContentValues values = new ContentValues();
+                                        values.put(KEY_FBID, fbUserId);
+                                        values.put(KEY_NAME, fbUserName);
+                                        values.put(KEY_TOKEN, token);
+                                        db2.insertOrThrow(TABLE_Fbuser, null, values);
+                                        db2.close();
+
+                                        new Handler().postDelayed(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                Intent welcome = new Intent(OpeningMenu.this, FBuserStartGame.class);
+                                                welcome.putExtra("name", fbUserName);
+                                                welcome.putExtra("id", fbUserId);
+                                                startActivity(welcome);
+                                                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                                                finish();
+                                            }
+                                        }, 10);
+                                   }
                                 }
                             }
                         }).executeAsync();
@@ -173,8 +197,48 @@ public class OpeningMenu extends AppCompatActivity {
                         finish();
                     }
                 }, 10);
+
             }
         });
+
+        asOldGuest = findViewById(R.id.asoldguest);
+
+        asOldGuest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String guestLastQuery = "SELECT  * FROM "+TABLE_Guest+" WHERE "+KEY_ID+" = (SELECT max("+KEY_ID+") FROM "+TABLE_Guest+")";
+                SQLiteDatabase db = helper.getReadableDatabase();
+
+                Cursor cursor = db.rawQuery(guestLastQuery, null);
+
+                String id[] = new String[cursor.getCount()];
+                int i = 0;
+                if (cursor.getCount() > 0)
+                {
+                    cursor.moveToFirst();
+                    do {
+                        id[i] = cursor.getString(cursor.getColumnIndex(KEY_NAME));
+                        i++;
+                    } while (cursor.moveToNext());
+                    cursor.close();
+
+                    final String name = id[0];
+
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            Intent welcome = new Intent(OpeningMenu.this, GuestStartGame.class);
+                            welcome.putExtra("name", name);
+                            startActivity(welcome);
+                            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                            finish();
+                        }
+                    }, 10);
+                }
+            }
+        });
+
+
     }
 
     @Override

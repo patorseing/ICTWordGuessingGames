@@ -23,7 +23,8 @@
             android:layout_margin="10sp"
             android:text="Wireless"
             android:background="@color/orenge"
-            android:textColor="@android:color/white"/>
+            android:textColor="@android:color/white"
+            android:textSize="25sp"/>
 
         <Button
             android:id="@+id/guest_sec"
@@ -33,7 +34,8 @@
             android:layout_margin="10sp"
             android:text="Security"
             android:background="@color/loveblue"
-            android:textColor="@android:color/white"/>
+            android:textColor="@android:color/white"
+            android:textSize="25sp"/>
 
         <Button
             android:id="@+id/guest_db"
@@ -43,7 +45,8 @@
             android:layout_margin="10sp"
             android:text="Database"
             android:background="@color/purple"
-            android:textColor="@android:color/white"/>
+            android:textColor="@android:color/white"
+            android:textSize="25sp"/>
 
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

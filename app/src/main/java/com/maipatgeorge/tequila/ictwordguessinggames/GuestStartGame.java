@@ -1,6 +1,9 @@
 package com.maipatgeorge.tequila.ictwordguessinggames;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
@@ -11,10 +14,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.maipatgeorge.tequila.ictwordguessinggames.DB.DBHelper;
+
+import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_CAT;
+import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.TABLE_Category;
 
 public class GuestStartGame extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -25,6 +32,11 @@ public class GuestStartGame extends AppCompatActivity
     DBHelper helper;
     Intent intent;
     Bundle bd;
+    String[] cat_name;
+
+    Button wl_guest;
+    Button se_guest;
+    Button db_guest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +78,25 @@ public class GuestStartGame extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        cat_name = new String[]{"wireless", "security", "database"};
+
+        SQLiteDatabase db = helper.getWritableDatabase();
+
+        String catcount = "SELECT * FROM "+TABLE_Category+" WHERE "+KEY_CAT+" = ? ";
+
+        SQLiteDatabase db1 = helper.getReadableDatabase();
+
+        for (int i = 0; i<cat_name.length;i++){
+            Cursor cursor = db1.rawQuery(catcount, new String[] {cat_name[i]});
+            if (cursor.getCount() > 0){
+
+            } else {
+                ContentValues values = new ContentValues();
+                values.put(KEY_CAT, cat_name[i]);
+                db.insertOrThrow(TABLE_Category, null, values);
+            }
+        }
     }
 
     @Override
