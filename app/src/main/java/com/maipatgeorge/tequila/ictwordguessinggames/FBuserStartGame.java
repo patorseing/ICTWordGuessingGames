@@ -11,35 +11,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.maipatgeorge.tequila.ictwordguessinggames.DB.DBHelper;
+import com.facebook.login.LoginManager;
 
-public class GuestStartGame extends AppCompatActivity
+public class FBuserStartGame extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
-    ImageView imageView;
-    NavigationView navigationView;
-    TextView name;
-    DBHelper helper;
-    TextView res;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_guest_start_game);
+        setContentView(R.layout.activity_fbuser_start_game);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        navigationView = (NavigationView) findViewById(R.id.nav_view);
-        imageView = navigationView.getHeaderView(0).findViewById(R.id.imageView);
-        imageView.setImageResource(R.drawable.profile_image_web);
-        name = navigationView.getHeaderView(0).findViewById(R.id.guestname);
-        res = (TextView) findViewById(R.id.result2);
-        res.setText("good");
-        helper = new DBHelper(this);
-
-        name.setText("ICT");
 
         /*
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -75,10 +58,9 @@ public class GuestStartGame extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.guest_start_game, menu);
+        getMenuInflater().inflate(R.menu.fbuser_start_game, menu);
         return true;
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -86,16 +68,14 @@ public class GuestStartGame extends AppCompatActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        /*
+/*
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
-        */
+*/
         return super.onOptionsItemSelected(item);
     }
-
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -103,21 +83,22 @@ public class GuestStartGame extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_edit) {
+        if (id == R.id.nav_settingFB) {
             // Handle the camera action
-        } else if (id == R.id.nav_edit) {
-
-        } else if (id == R.id.nav_back) {
+        } else if (id == R.id.nav_out) {
+            LoginManager.getInstance().logOut();
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    Intent welcome = new Intent(GuestStartGame.this, OpeningMenu.class);
+                    Intent welcome = new Intent(FBuserStartGame.this, OpeningMenu.class);
                     startActivity(welcome);
                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                     finish();
                 }
             }, 10);
-        } /*else if (id == R.id.nav_manage) {
+        } /*else if (id == R.id.nav_slideshow) {
+
+        } else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_share) {
 
@@ -130,5 +111,3 @@ public class GuestStartGame extends AppCompatActivity
         return true;
     }
 }
-
-

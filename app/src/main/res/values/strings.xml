@@ -15,4 +15,6 @@
     <string name="title_section3">Section 3</string>
 
     <string name="action_example">Example action</string>
+    <string name="title_activity_guest_start_game">ICT game</string>
+    <string name="title_activity_fbuser_start_game">ICT Game</string>
 </resources>

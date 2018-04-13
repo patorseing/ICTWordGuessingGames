@@ -110,19 +110,17 @@ public class OpeningMenu extends AppCompatActivity {
                                     values.put(KEY_NAME, fbUserName);
                                     values.put(KEY_TOKEN, token);
                                     db.insertOrThrow(TABLE_Fbuser, null, values);
-                                    //db.close();
+                                    db.close();
 
-                                    /*
                                     new Handler().postDelayed(new Runnable() {
                                         @Override
                                         public void run() {
-                                            Intent welcome = new Intent(OpeningMenu.this, StartGame.class);
+                                            Intent welcome = new Intent(OpeningMenu.this, FBuserStartGame.class);
                                             startActivity(welcome);
                                             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                                             finish();
                                         }
                                     }, 10);
-                                    */
                                 }
                             }
                         }).executeAsync();

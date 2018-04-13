@@ -24,7 +24,14 @@
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
 
-        <activity android:name=".GuestStartGame"></activity>
+        <activity
+            android:name=".GuestStartGame"
+            android:label="@string/title_activity_guest_start_game"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".FBuserStartGame"
+            android:label="@string/title_activity_fbuser_start_game"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
