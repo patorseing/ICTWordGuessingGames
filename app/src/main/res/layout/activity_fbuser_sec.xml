@@ -4,7 +4,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
 xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
-tools:context=".GuestDB"
+tools:context=".FBuserSEC"
 android:background="@color/lightgreen">
 
 <LinearLayout
@@ -18,13 +18,13 @@ android:background="@color/lightgreen">
         android:layout_height="0dp">
 
         <TextView
-            android:id="@+id/guest_db"
+            android:id="@+id/fbuser_se"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_margin="@dimen/activity_vertical_margin"
             android:fontFamily="sans-serif-smallcaps"
-            android:text="Database"
+            android:text="Security"
             android:textColor="@color/colorPrimary"
             android:textSize="34sp"
             android:textStyle="bold" />
@@ -40,7 +40,7 @@ android:background="@color/lightgreen">
         android:layout_margin="20sp"
         android:scrollbars="vertical">
         <LinearLayout
-            android:id="@+id/gdblev1"
+            android:id="@+id/fbselev1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="5sp"
@@ -50,21 +50,21 @@ android:background="@color/lightgreen">
             app:layout_columnWeight="1">
 
             <Button
-                android:id="@+id/gdblev11"
+                android:id="@+id/fbselev11"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="Button" />
 
             <TextView
-                android:id="@+id/gdblev12"
+                android:id="@+id/fbselev12"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="TextView" />
         </LinearLayout>
         <LinearLayout
-            android:id="@+id/gdblev2"
+            android:id="@+id/fbselev2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="5sp"
@@ -75,21 +75,21 @@ android:background="@color/lightgreen">
             android:visibility="gone">
 
             <Button
-                android:id="@+id/gdblev21"
+                android:id="@+id/fbselev21"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="Button" />
 
             <TextView
-                android:id="@+id/gdblev22"
+                android:id="@+id/fbselev22"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="TextView" />
         </LinearLayout>
         <LinearLayout
-            android:id="@+id/gdblev3"
+            android:id="@+id/fbselev3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="5sp"
@@ -100,21 +100,21 @@ android:background="@color/lightgreen">
             android:visibility="gone">
 
             <Button
-                android:id="@+id/gdblev31"
+                android:id="@+id/fbselev31"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="Button" />
 
             <TextView
-                android:id="@+id/gdblev32"
+                android:id="@+id/fbselev32"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="TextView" />
         </LinearLayout>
         <LinearLayout
-            android:id="@+id/gdblev4"
+            android:id="@+id/fbselev4"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="5sp"
@@ -125,21 +125,21 @@ android:background="@color/lightgreen">
             android:visibility="gone">
 
             <Button
-                android:id="@+id/gdblev41"
+                android:id="@+id/fbselev41"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="Button" />
 
             <TextView
-                android:id="@+id/gdblev42"
+                android:id="@+id/fbselev42"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="TextView" />
         </LinearLayout>
         <LinearLayout
-            android:id="@+id/gdblev5"
+            android:id="@+id/fbselev5"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="5sp"
@@ -150,21 +150,21 @@ android:background="@color/lightgreen">
             android:visibility="gone">
 
             <Button
-                android:id="@+id/gdblev51"
+                android:id="@+id/fbselev51"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="Button" />
 
             <TextView
-                android:id="@+id/gdblev52"
+                android:id="@+id/fbselev52"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="TextView" />
         </LinearLayout>
         <LinearLayout
-            android:id="@+id/gdblev6"
+            android:id="@+id/fbselev6"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="5sp"
@@ -175,21 +175,21 @@ android:background="@color/lightgreen">
             android:visibility="gone">
 
             <Button
-                android:id="@+id/gdblev61"
+                android:id="@+id/fbselev61"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="Button" />
 
             <TextView
-                android:id="@+id/gdblev62"
+                android:id="@+id/fbselev62"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="TextView" />
         </LinearLayout>
         <LinearLayout
-            android:id="@+id/gdblev7"
+            android:id="@+id/fbselev7"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="5sp"
@@ -200,21 +200,21 @@ android:background="@color/lightgreen">
             android:visibility="gone">
 
             <Button
-                android:id="@+id/gdblev71"
+                android:id="@+id/fbselev71"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="Button" />
 
             <TextView
-                android:id="@+id/gdblev72"
+                android:id="@+id/fbselev72"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="TextView" />
         </LinearLayout>
         <LinearLayout
-            android:id="@+id/gdblev8"
+            android:id="@+id/fbselev8"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="5sp"
@@ -225,21 +225,21 @@ android:background="@color/lightgreen">
             android:visibility="gone">
 
             <Button
-                android:id="@+id/gdblev81"
+                android:id="@+id/fbselev81"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="Button" />
 
             <TextView
-                android:id="@+id/gdblev82"
+                android:id="@+id/fbselev82"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="TextView" />
         </LinearLayout>
         <LinearLayout
-            android:id="@+id/gdblev9"
+            android:id="@+id/fbselev9"
             android:layout_width="0dp"
             android:layout_marginBottom="50sp"
             android:layout_height="wrap_content"
@@ -250,14 +250,14 @@ android:background="@color/lightgreen">
             android:visibility="gone">
 
             <Button
-                android:id="@+id/gdblev91"
+                android:id="@+id/fbselev91"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="Button" />
 
             <TextView
-                android:id="@+id/gdblev92"
+                android:id="@+id/fbselev92"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"

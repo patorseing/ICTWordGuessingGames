@@ -1,14 +1,268 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".GuestSEC">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".GuestSEC"
+android:background="@color/lightgreen">
 
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="SEC" />
-</android.support.constraint.ConstraintLayout>
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_weight="2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <TextView
+            android:id="@+id/guest_se"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_margin="@dimen/activity_vertical_margin"
+            android:fontFamily="sans-serif-smallcaps"
+            android:text="Security"
+            android:textColor="@color/colorPrimary"
+            android:textSize="34sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+
+    <android.support.v7.widget.GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:columnCount="3"
+        app:rowCount="3"
+        android:layout_margin="20sp"
+        android:scrollbars="vertical">
+        <LinearLayout
+            android:id="@+id/gselev1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5sp"
+            android:layout_marginBottom="50sp"
+            app:layout_rowSpan="2"
+            android:orientation="vertical"
+            app:layout_columnWeight="1">
+
+            <Button
+                android:id="@+id/gselev11"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Button" />
+
+            <TextView
+                android:id="@+id/gselev12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="TextView" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/gselev2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5sp"
+            android:layout_marginBottom="50sp"
+            android:orientation="vertical"
+            app:layout_columnWeight="1"
+            app:layout_rowSpan="2"
+            android:visibility="gone">
+
+            <Button
+                android:id="@+id/gselev21"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Button" />
+
+            <TextView
+                android:id="@+id/gselev22"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="TextView" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/gselev3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5sp"
+            android:layout_marginBottom="50sp"
+            android:orientation="vertical"
+            app:layout_columnWeight="1"
+            app:layout_rowSpan="2"
+            android:visibility="gone">
+
+            <Button
+                android:id="@+id/gselev31"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Button" />
+
+            <TextView
+                android:id="@+id/gselev32"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="TextView" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/gselev4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5sp"
+            android:layout_marginBottom="50sp"
+            android:orientation="vertical"
+            app:layout_columnWeight="1"
+            app:layout_rowSpan="2"
+            android:visibility="gone">
+
+            <Button
+                android:id="@+id/gselev41"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Button" />
+
+            <TextView
+                android:id="@+id/gselev42"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="TextView" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/gselev5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5sp"
+            android:layout_marginBottom="50sp"
+            android:orientation="vertical"
+            app:layout_columnWeight="1"
+            app:layout_rowSpan="2"
+            android:visibility="gone">
+
+            <Button
+                android:id="@+id/gselev51"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Button" />
+
+            <TextView
+                android:id="@+id/gselev52"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="TextView" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/gselev6"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5sp"
+            android:layout_marginBottom="50sp"
+            android:orientation="vertical"
+            app:layout_columnWeight="1"
+            app:layout_rowSpan="2"
+            android:visibility="gone">
+
+            <Button
+                android:id="@+id/gselev61"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Button" />
+
+            <TextView
+                android:id="@+id/gselev62"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="TextView" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/gselev7"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5sp"
+            android:layout_marginBottom="50sp"
+            android:orientation="vertical"
+            app:layout_columnWeight="1"
+            app:layout_rowSpan="2"
+            android:visibility="gone">
+
+            <Button
+                android:id="@+id/gselev71"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Button" />
+
+            <TextView
+                android:id="@+id/gselev72"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="TextView" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/gselev8"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5sp"
+            android:layout_marginBottom="50sp"
+            android:orientation="vertical"
+            app:layout_columnWeight="1"
+            app:layout_rowSpan="2"
+            android:visibility="gone">
+
+            <Button
+                android:id="@+id/gselev81"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Button" />
+
+            <TextView
+                android:id="@+id/gselev82"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="TextView" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/gselev9"
+            android:layout_width="0dp"
+            android:layout_marginBottom="50sp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5sp"
+            android:orientation="vertical"
+            app:layout_columnWeight="1"
+            app:layout_rowSpan="2"
+            android:visibility="gone">
+
+            <Button
+                android:id="@+id/gselev91"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Button" />
+
+            <TextView
+                android:id="@+id/gselev92"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="TextView" />
+        </LinearLayout>
+    </android.support.v7.widget.GridLayout>
+</LinearLayout>
+</ScrollView>

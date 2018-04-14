@@ -7,17 +7,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class GuestDB extends AppCompatActivity {
+public class FBuserWL extends AppCompatActivity {
 
     Intent intent;
     Bundle bd;
-
     String getName;
+    String fbid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fbuser_db);
+        setContentView(R.layout.activity_fbuser_wl);
 
         getSupportActionBar().setTitle("ICT game");
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -37,18 +37,19 @@ public class GuestDB extends AppCompatActivity {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    Intent welcome = new Intent(GuestDB.this, GuestStartGame.class);
+                    Intent welcome = new Intent(FBuserWL.this, FBuserStartGame.class);
                     intent = getIntent();
                     bd = intent.getExtras();
-
                     if(bd != null)
                     {
                         getName = (String) bd.get("name");
+                        fbid = (String) bd.get("id");
+                        welcome.putExtra("name", getName);
+                        welcome.putExtra("id", fbid);
+                        startActivity(welcome);
+                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                        finish();
                     }
-                    welcome.putExtra("name", getName);
-                    startActivity(welcome);
-                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                    finish();
                 }
             }, 10);
         } else if (id == R.id.action_settings){

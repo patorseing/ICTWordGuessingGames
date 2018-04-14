@@ -9,4 +9,44 @@
     tools:showIn="@layout/app_bar_fbuser_start_game"
     android:background="@color/lightgreen">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/fb_wl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="10sp"
+            android:text="Wireless"
+            android:background="@color/orenge"
+            android:textColor="@android:color/white"
+            android:textSize="25sp"/>
+
+        <Button
+            android:id="@+id/fb_sec"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="10sp"
+            android:text="Security"
+            android:background="@color/loveblue"
+            android:textColor="@android:color/white"
+            android:textSize="25sp"/>
+
+        <Button
+            android:id="@+id/fb_db"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="10sp"
+            android:text="Database"
+            android:background="@color/purple"
+            android:textColor="@android:color/white"
+            android:textSize="25sp"/>
+
+    </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>

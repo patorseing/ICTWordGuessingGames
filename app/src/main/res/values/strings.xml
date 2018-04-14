@@ -17,6 +17,5 @@
 
     <string name="action_example">Example action</string>
     <string name="title_activity_guest_start_game">ICT game</string>
-    <string name="title_activity_fbuser_start_game">ICT Game</string>
-    <string name="title_activity_fbuser_wl">ICT game</string>
+    <string name="title_activity_fbuser_start_game">ICT game</string>
 </resources>

@@ -23,6 +23,7 @@ public class Constant implements BaseColumns {
 
     //Category
     public static final String KEY_CAT = "cat";
+    public static String[] cat_name = new String[]{"wireless", "security", "database"};
 
     //Level
     public static final String KEY_LEVEL = "Q";

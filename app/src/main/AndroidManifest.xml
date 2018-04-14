@@ -32,13 +32,12 @@
             android:name=".FBuserStartGame"
             android:label="@string/title_activity_fbuser_start_game"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".FBuserWL"
-            android:label="@string/title_activity_fbuser_wl"
-            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".GuestDB" />
         <activity android:name=".GuestWL" />
-        <activity android:name=".GuestSEC"></activity>
+        <activity android:name=".GuestSEC" />
+        <activity android:name=".FBuserWL" />
+        <activity android:name=".FBuserSEC" />
+        <activity android:name=".FBuserDB"></activity>
     </application>
 
 </manifest>

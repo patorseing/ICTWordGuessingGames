@@ -23,6 +23,7 @@ import com.maipatgeorge.tequila.ictwordguessinggames.DB.DBHelper;
 
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_CAT;
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.TABLE_Category;
+import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.cat_name;
 
 public class GuestStartGame extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -33,11 +34,11 @@ public class GuestStartGame extends AppCompatActivity
     DBHelper helper;
     Intent intent;
     Bundle bd;
-    String[] cat_name;
 
     Button wl_guest;
     Button se_guest;
     Button db_guest;
+    String getName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,10 +57,9 @@ public class GuestStartGame extends AppCompatActivity
 
         if(bd != null)
         {
-            String getName = (String) bd.get("name");
+            getName = (String) bd.get("name");
             name.setText(getName);
         }
-
         /*
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -79,8 +79,6 @@ public class GuestStartGame extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-        cat_name = new String[]{"wireless", "security", "database"};
 
         SQLiteDatabase db = helper.getWritableDatabase();
 
@@ -108,6 +106,7 @@ public class GuestStartGame extends AppCompatActivity
                     @Override
                     public void run() {
                         Intent welcome = new Intent(GuestStartGame.this, GuestWL.class);
+                        welcome.putExtra("name", getName);
                         startActivity(welcome);
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         finish();
@@ -125,6 +124,7 @@ public class GuestStartGame extends AppCompatActivity
                     @Override
                     public void run() {
                         Intent welcome = new Intent(GuestStartGame.this, GuestSEC.class);
+                        welcome.putExtra("name", getName);
                         startActivity(welcome);
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         finish();
@@ -142,6 +142,7 @@ public class GuestStartGame extends AppCompatActivity
                     @Override
                     public void run() {
                         Intent welcome = new Intent(GuestStartGame.this, GuestDB.class);
+                        welcome.putExtra("name", getName);
                         startActivity(welcome);
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         finish();
