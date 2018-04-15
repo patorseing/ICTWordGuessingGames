@@ -54,14 +54,17 @@ android:background="@color/lightgreen">
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Button" />
+                android:background="@color/orenge"
+                android:textColor="@android:color/white"
+                android:text="1" />
 
-            <TextView
+            <ImageView
                 android:id="@+id/fbwllev12"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="TextView" />
+                app:srcCompat="@drawable/ic_check_black_24dp"
+                android:visibility="gone"/>
+
         </LinearLayout>
         <LinearLayout
             android:id="@+id/fbwllev2"
@@ -79,14 +82,17 @@ android:background="@color/lightgreen">
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Button" />
+                android:background="@color/orenge"
+                android:textColor="@android:color/white"
+                android:text="2" />
 
-            <TextView
+            <ImageView
                 android:id="@+id/fbwllev22"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="TextView" />
+                app:srcCompat="@drawable/ic_check_black_24dp"
+                android:visibility="gone"/>
+
         </LinearLayout>
         <LinearLayout
             android:id="@+id/fbwllev3"
@@ -104,14 +110,16 @@ android:background="@color/lightgreen">
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Button" />
+                android:background="@color/orenge"
+                android:textColor="@android:color/white"
+                android:text="3" />
 
-            <TextView
+            <ImageView
                 android:id="@+id/fbwllev32"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="TextView" />
+                app:srcCompat="@drawable/ic_check_black_24dp"
+                android:visibility="gone"/>
         </LinearLayout>
         <LinearLayout
             android:id="@+id/fbwllev4"
@@ -129,14 +137,16 @@ android:background="@color/lightgreen">
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Button" />
+                android:background="@color/orenge"
+                android:textColor="@android:color/white"
+                android:text="4" />
 
-            <TextView
+            <ImageView
                 android:id="@+id/fbwllev42"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="TextView" />
+                app:srcCompat="@drawable/ic_check_black_24dp"
+                android:visibility="gone"/>
         </LinearLayout>
         <LinearLayout
             android:id="@+id/fbwllev5"
@@ -154,14 +164,16 @@ android:background="@color/lightgreen">
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Button" />
+                android:background="@color/orenge"
+                android:textColor="@android:color/white"
+                android:text="5" />
 
-            <TextView
+            <ImageView
                 android:id="@+id/fbwllev52"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="TextView" />
+                app:srcCompat="@drawable/ic_check_black_24dp"
+                android:visibility="gone"/>
         </LinearLayout>
         <LinearLayout
             android:id="@+id/fbwllev6"
@@ -179,14 +191,16 @@ android:background="@color/lightgreen">
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Button" />
+                android:background="@color/orenge"
+                android:textColor="@android:color/white"
+                android:text="6" />
 
-            <TextView
+            <ImageView
                 android:id="@+id/fbwllev62"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="TextView" />
+                app:srcCompat="@drawable/ic_check_black_24dp"
+                android:visibility="gone"/>
         </LinearLayout>
         <LinearLayout
             android:id="@+id/fbwllev7"
@@ -204,14 +218,16 @@ android:background="@color/lightgreen">
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Button" />
+                android:background="@color/orenge"
+                android:textColor="@android:color/white"
+                android:text="7" />
 
-            <TextView
+            <ImageView
                 android:id="@+id/fbwllev72"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="TextView" />
+                app:srcCompat="@drawable/ic_check_black_24dp"
+                android:visibility="gone"/>
         </LinearLayout>
         <LinearLayout
             android:id="@+id/fbwllev8"
@@ -229,14 +245,16 @@ android:background="@color/lightgreen">
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Button" />
+                android:background="@color/orenge"
+                android:textColor="@android:color/white"
+                android:text="8" />
 
-            <TextView
+            <ImageView
                 android:id="@+id/fbwllev82"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="TextView" />
+                app:srcCompat="@drawable/ic_check_black_24dp"
+                android:visibility="gone"/>
         </LinearLayout>
         <LinearLayout
             android:id="@+id/fbwllev9"
@@ -254,14 +272,16 @@ android:background="@color/lightgreen">
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Button" />
+                android:background="@color/orenge"
+                android:textColor="@android:color/white"
+                android:text="9" />
 
-            <TextView
+            <ImageView
                 android:id="@+id/fbwllev92"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="TextView" />
+                app:srcCompat="@drawable/ic_check_black_24dp"
+                android:visibility="gone"/>
         </LinearLayout>
     </android.support.v7.widget.GridLayout>
 </LinearLayout>

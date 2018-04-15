@@ -234,6 +234,8 @@ public class OpeningMenu extends AppCompatActivity {
                             finish();
                         }
                     }, 10);
+                } else {
+                    Toast.makeText(getApplicationContext(),"You don't have old guest user",Toast.LENGTH_SHORT).show();
                 }
             }
         });
