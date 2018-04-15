@@ -56,7 +56,8 @@ android:background="@color/lightgreen">
                 android:gravity="center"
                 android:text="1"
                 android:background="@color/purple"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"
+                android:textSize="24sp"/>
 
             <ImageView
                 android:id="@+id/fbdblev12"
@@ -83,7 +84,8 @@ android:background="@color/lightgreen">
                 android:gravity="center"
                 android:text="2"
                 android:background="@color/purple"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"
+                android:textSize="24sp"/>
 
             <ImageView
                 android:id="@+id/fbdblev22"
@@ -110,7 +112,8 @@ android:background="@color/lightgreen">
                 android:gravity="center"
                 android:text="3"
                 android:background="@color/purple"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"
+                android:textSize="24sp"/>
 
             <ImageView
                 android:id="@+id/fbdblev32"
@@ -137,7 +140,8 @@ android:background="@color/lightgreen">
                 android:gravity="center"
                 android:text="4"
                 android:background="@color/purple"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"
+                android:textSize="24sp"/>
 
             <ImageView
                 android:id="@+id/fbdblev42"
@@ -164,7 +168,8 @@ android:background="@color/lightgreen">
                 android:gravity="center"
                 android:text="5"
                 android:background="@color/purple"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"
+                android:textSize="24sp"/>
 
             <ImageView
                 android:id="@+id/fbdblev52"
@@ -191,7 +196,8 @@ android:background="@color/lightgreen">
                 android:gravity="center"
                 android:text="6"
                 android:background="@color/purple"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"
+                android:textSize="24sp"/>
 
             <ImageView
                 android:id="@+id/fbdblev62"
@@ -218,7 +224,8 @@ android:background="@color/lightgreen">
                 android:gravity="center"
                 android:text="7"
                 android:background="@color/purple"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"
+                android:textSize="24sp"/>
 
             <ImageView
                 android:id="@+id/fbdblev72"
@@ -245,7 +252,8 @@ android:background="@color/lightgreen">
                 android:gravity="center"
                 android:text="8"
                 android:background="@color/purple"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"
+                android:textSize="24sp"/>
 
             <ImageView
                 android:id="@+id/fbdblev82"
@@ -272,7 +280,8 @@ android:background="@color/lightgreen">
                 android:gravity="center"
                 android:text="9"
                 android:background="@color/purple"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"
+                android:textSize="24sp"/>
 
             <ImageView
                 android:id="@+id/fbdblev92"

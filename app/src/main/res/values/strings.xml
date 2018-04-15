@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">ICT Word Guessing Games</string>
-    <string name="guest">Login as Guest</string>
+    <string name="guest">Login as new Guest</string>
     <string name="asguest">Continue old Guest</string>
     <string name="facebook_app_id">1219706988159906</string>
     <string name="title_activity_start_game_game">ICT game</string>

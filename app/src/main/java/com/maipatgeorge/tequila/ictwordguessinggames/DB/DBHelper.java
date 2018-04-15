@@ -6,12 +6,18 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_CAT;
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_FBID;
+import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_Gname;
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_ID;
+import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_LEVEL;
+import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_L_ID;
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_NAME;
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_TOKEN;
+import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_catID;
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.TABLE_Category;
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.TABLE_Fbuser;
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.TABLE_Guest;
+import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.TABLE_GuestPass;
+import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.TABLE_Level;
 
 public class DBHelper extends SQLiteOpenHelper {
 
@@ -19,7 +25,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String LOG = "DBHelper";
 
     // Database Version
-    private static final int DB_VERSION = 7;
+    private static final int DB_VERSION = 19;
 
     // Database Name
     private static final String DB_NAME = "ICT_game.db";
@@ -40,18 +46,16 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String CREATE_TABLE_CATEGORY = "CREATE TABLE "
             + TABLE_Category + "( " + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + KEY_CAT +" TEXT)";
 
-    /*
     //LEVEL table create statement
     private static final String CREATE_TABLE_LEVEL = "CREATE TABLE "
-            + TABLE_Level + "(" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + KEY_LEVEL +" INTEGER, FOREIGN KEY ( "
-            + KEY_catID+" ) REFERENCES " +TABLE_Category+" ( "+KEY_ID+" ))";
+            + TABLE_Level + " ( " + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + KEY_LEVEL +" TAXT, "
+            + KEY_catID+" INTEGER)";
 
     //GuestPass table create statement
-    private static final String CREATE_TABLE_GuestPass = "CREATE TABLE "
-            + TABLE_GuestPass + "( " + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, FOREIGN KEY ( "
-            + KEY_G_ID+" ) REFERENCES " +TABLE_Guest+" ( "+KEY_ID+" ), FOREIGN KEY ("
-            + KEY_L_ID +" ) REFERENCES " +TABLE_Level+" ( "+KEY_ID+" ))";
+    private static final String CREATE_TABLE_GuestPass = "CREATE TABLE " + TABLE_GuestPass + "( " + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + KEY_Gname + " TEXT, " + KEY_L_ID +" INTEGER )";
 
+    /*
     //FbuserPass table create statement
     private static final String CREATE_TABLE_FbuserPass = "CREATE TABLE "
             + TABLE_FbuserPass + "(" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, FOREIGN KEY ("
@@ -69,8 +73,8 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_GUEST);
         db.execSQL(CREATE_TABLE_FB_USER);
         db.execSQL(CREATE_TABLE_CATEGORY);
-        //db.execSQL(CREATE_TABLE_LEVEL);
-        //db.execSQL(CREATE_TABLE_GuestPass);
+        db.execSQL(CREATE_TABLE_LEVEL);
+        db.execSQL(CREATE_TABLE_GuestPass);
         //db.execSQL(CREATE_TABLE_FbuserPass);
     }
 
@@ -80,9 +84,9 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_Guest);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_Fbuser);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_Category);
-        //db.execSQL("DROP TABLE IF EXISTS " + TABLE_Level);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_Level);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_GuestPass);
         //db.execSQL("DROP TABLE IF EXISTS " + TABLE_FbuserPass);
-        //db.execSQL("DROP TABLE IF EXISTS " + TABLE_GuestPass);
 
         // create new tables
         onCreate(db);

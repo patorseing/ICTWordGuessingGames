@@ -30,7 +30,7 @@ public class Constant implements BaseColumns {
     public static final String KEY_catID = "catID";
 
     //GuestPass
-    public static final String KEY_G_ID = "g_id";
+    public static final String KEY_Gname = "guest_name";
     public static final String KEY_L_ID = "l_id";
 
     //FbuserPass

@@ -181,11 +181,17 @@ public class OpeningMenu extends AppCompatActivity {
                 final UUID uuid = UUID.randomUUID();
                 final String name = uuid.toString().replace("-", "").substring(0, 15);
                 textView.setText(name);
+
+                String sql = "DELETE FROM "+TABLE_Guest+" WHERE "+KEY_ID+" = (SELECT max("+KEY_ID+") FROM "+TABLE_Guest+")";
+
                 SQLiteDatabase db = helper.getWritableDatabase();
+                db.execSQL(sql);
                 ContentValues values = new ContentValues();
                 values.put(KEY_NAME, name);
                 db.insertOrThrow(TABLE_Guest, null, values);
                 db.close();
+
+
 
                 new Handler().postDelayed(new Runnable() {
                     @Override

@@ -53,10 +53,12 @@
                 android:id="@+id/gwllev11"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:background="@color/orenge"
+                android:gravity="center"
+                android:text="1"
                 android:textColor="@android:color/white"
-                android:text="1" />
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <ImageView
                 android:id="@+id/gwllev12"
@@ -84,6 +86,7 @@
                 android:gravity="center"
                 android:background="@color/orenge"
                 android:textColor="@android:color/white"
+                android:textSize="24sp"
                 android:text="2" />
 
             <ImageView
@@ -112,6 +115,7 @@
                 android:gravity="center"
                 android:background="@color/orenge"
                 android:textColor="@android:color/white"
+                android:textSize="24sp"
                 android:text="3" />
 
             <ImageView
@@ -139,6 +143,7 @@
                 android:gravity="center"
                 android:background="@color/orenge"
                 android:textColor="@android:color/white"
+                android:textSize="24sp"
                 android:text="4" />
 
             <ImageView
@@ -166,6 +171,7 @@
                 android:gravity="center"
                 android:background="@color/orenge"
                 android:textColor="@android:color/white"
+                android:textSize="24sp"
                 android:text="5" />
 
             <ImageView
@@ -193,6 +199,7 @@
                 android:gravity="center"
                 android:background="@color/orenge"
                 android:textColor="@android:color/white"
+                android:textSize="24sp"
                 android:text="6" />
 
             <ImageView
@@ -220,6 +227,7 @@
                 android:gravity="center"
                 android:background="@color/orenge"
                 android:textColor="@android:color/white"
+                android:textSize="24sp"
                 android:text="7" />
 
             <ImageView
@@ -247,6 +255,7 @@
                 android:gravity="center"
                 android:background="@color/orenge"
                 android:textColor="@android:color/white"
+                android:textSize="24sp"
                 android:text="8" />
 
             <ImageView
@@ -274,6 +283,7 @@
                 android:gravity="center"
                 android:background="@color/orenge"
                 android:textColor="@android:color/white"
+                android:textSize="24sp"
                 android:text="9" />
 
             <ImageView

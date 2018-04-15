@@ -16,6 +16,11 @@
             android:id="@+id/nav_setting"
             android:icon="@drawable/ic_settings_black_24dp"
             android:title="Setting" />
+
+        <item
+            android:id="@+id/nav_reset"
+            android:icon="@drawable/ic_refresh_black_24dp"
+            android:title="reset stage" />
     </group>
 
     <!--<item android:title="Communicate">

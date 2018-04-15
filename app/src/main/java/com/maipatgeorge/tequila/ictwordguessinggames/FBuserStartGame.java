@@ -220,9 +220,9 @@ public class FBuserStartGame extends AppCompatActivity
                     finish();
                 }
             }, 10);
-        } /*else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_resetFB) {
 
-        } else if (id == R.id.nav_manage) {
+        } /*else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_share) {
 

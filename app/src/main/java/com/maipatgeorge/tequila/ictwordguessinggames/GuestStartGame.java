@@ -207,9 +207,9 @@ public class GuestStartGame extends AppCompatActivity
                     finish();
                 }
             }, 10);
-        } /*else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_reset) {
 
-        } else if (id == R.id.nav_share) {
+        } /*else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
 
