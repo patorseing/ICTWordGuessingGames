@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Glev.GWL1"
-    android:background="@color/lightgreen">
+    android:background="@color/lightgreen"
+    android:id="@+id/GWLv1">
 
 
     <LinearLayout
@@ -26,14 +28,31 @@
             android:textStyle="bold"
             android:layout_gravity="center" />
 
-        <ImageView
-            android:id="@+id/GWL1"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:padding="5sp"
-            android:background="@android:color/white"
-            app:srcCompat="@drawable/wl1"/>
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/GWL1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="@android:color/white"
+                android:padding="5sp"
+                app:srcCompat="@drawable/wl1"
+                android:layout_marginRight="5sp"/>
+
+            <ImageButton
+                android:id="@+id/shareWL1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/ic_menu_share"
+                android:background="@color/colorAccent"/>
+        </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="wrap_content"

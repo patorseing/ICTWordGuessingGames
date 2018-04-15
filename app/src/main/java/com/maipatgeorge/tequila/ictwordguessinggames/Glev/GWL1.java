@@ -4,19 +4,30 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.maipatgeorge.tequila.ictwordguessinggames.DB.DBHelper;
 import com.maipatgeorge.tequila.ictwordguessinggames.GuestWL;
 import com.maipatgeorge.tequila.ictwordguessinggames.R;
+import com.maipatgeorge.tequila.ictwordguessinggames.Screenshot;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_Gname;
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_ID;
@@ -57,10 +68,18 @@ public class GWL1 extends AppCompatActivity {
 
     Button delete;
     Button enter;
+
+    ImageButton share;
+    ImageView imageView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gwl1);
+
+        final View rootView = getWindow().getDecorView().findViewById(android.R.id.content);
+
+        //main = findViewById(R.id.GWLv1);
 
         helper = new DBHelper(this);
 
@@ -307,6 +326,36 @@ public class GWL1 extends AppCompatActivity {
             }
         });
 
+        imageView = (ImageView) findViewById(R.id.GWL1);
+
+        share = (ImageButton) findViewById(R.id.shareWL1);
+
+        share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bitmap b = Screenshot.takescreenshotOfRootview(imageView);
+                startShare(b);
+                //imageView.setImageBitmap(b);
+                //main.setBackgroundColor(Color.parseColor("#999999 "));
+            }
+        });
+    }
+
+    private void startShare(Bitmap b) {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("image/jpeg");
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        b.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+        File file = new File(Environment.getExternalStorageDirectory()+File.separator+"shot.jpg");
+        try {
+            file.createNewFile();
+            FileOutputStream fileOutputStream = new FileOutputStream(file);
+            fileOutputStream.write(byteArrayOutputStream.toByteArray());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        intent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file:///sdcard/shot.jpg"));
+        startActivity(Intent.createChooser(intent, "share image"));
     }
 
     @Override
@@ -335,4 +384,5 @@ public class GWL1 extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 }
