@@ -53,7 +53,8 @@
         <activity android:name=".FBuserDB"
             android:screenOrientation="portrait"/>
         <activity android:name=".Glev.GWL1"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"
+            android:hardwareAccelerated="false"></activity>
     </application>
 
 </manifest>
