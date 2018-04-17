@@ -1,12 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/l1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <com.maipatgeorge.tequila.ictwordguessinggames.util.GifImageView
-        android:id="@+id/congratulation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true" />
 
-</android.support.constraint.ConstraintLayout>
+        <com.maipatgeorge.tequila.ictwordguessinggames.util.GifImageView
+            android:id="@+id/congratss"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10sp"
+            android:layout_centerInParent="true" />
+
+        <LinearLayout
+            android:id="@+id/l2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+                <Button
+                    android:text="back"
+                    android:textSize="20sp"
+                    android:id="@+id/conback"
+                    android:layout_width="wrap_content"
+                    android:layout_margin="10sp"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/holo_blue_dark"/>
+                <Button
+                    android:text="stay"
+                    android:textSize="20sp"
+                    android:id="@+id/constay"
+                    android:layout_width="wrap_content"
+                    android:layout_margin="10sp"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/holo_red_light"/>
+        </LinearLayout>
+
+</LinearLayout>

@@ -22,8 +22,6 @@
         app:headerLayout="@layout/nav_header_guest_start_game"
         app:menu="@menu/activity_guest_start_game_drawer">
 
-
-
     </android.support.design.widget.NavigationView>
 
 </android.support.v4.widget.DrawerLayout>

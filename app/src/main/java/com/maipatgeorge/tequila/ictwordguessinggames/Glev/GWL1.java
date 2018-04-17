@@ -1,5 +1,6 @@
 package com.maipatgeorge.tequila.ictwordguessinggames.Glev;
 
+import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
@@ -16,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +25,7 @@ import com.maipatgeorge.tequila.ictwordguessinggames.DB.DBHelper;
 import com.maipatgeorge.tequila.ictwordguessinggames.GuestWL;
 import com.maipatgeorge.tequila.ictwordguessinggames.R;
 import com.maipatgeorge.tequila.ictwordguessinggames.Screenshot;
+import com.maipatgeorge.tequila.ictwordguessinggames.util.GifImageView;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -71,6 +74,15 @@ public class GWL1 extends AppCompatActivity {
 
     ImageButton share;
     ImageView imageView;
+
+    Dialog dialog;
+
+    GifImageView congrats;
+    Button back;
+    Button stay;
+
+    LinearLayout linearLayout;
+    LinearLayout linearLayout2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -311,6 +323,9 @@ public class GWL1 extends AppCompatActivity {
                         db.close();
                         db1.close();
                     }
+
+                    myDialogs();
+
                 } else {
                     for (int i = 0; i < Space.length; i++){
                         for (int j = 0; j < type.length; j++){
@@ -385,4 +400,50 @@ public class GWL1 extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void myDialogs(){
+        dialog = new Dialog(GWL1.this);
+        dialog.setContentView(R.layout.dialogscongres);
+
+        linearLayout = new LinearLayout(GWL1.this);
+        linearLayout = (LinearLayout) dialog.findViewById(R.id.l1);
+        linearLayout.setEnabled(true);
+
+        congrats = new GifImageView(GWL1.this);
+        congrats = (GifImageView) dialog.findViewById(R.id.congratss);
+        congrats.setGifImageResource(R.drawable.congratulation);
+        congrats.setEnabled(true);
+
+        linearLayout = new LinearLayout(GWL1.this);
+        linearLayout = (LinearLayout) dialog.findViewById(R.id.l2);
+        linearLayout.setEnabled(true);
+
+        back = (Button) dialog.findViewById(R.id.conback);
+        back.setEnabled(true);
+        stay = (Button) dialog.findViewById(R.id.constay);
+        stay.setEnabled(true);
+        dialog.show();
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent welcome = new Intent(GWL1.this, GuestWL.class);
+                        welcome.putExtra("name", getName);
+                        startActivity(welcome);
+                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                        finish();
+                    }
+                }, 10);
+            }
+        });
+
+        stay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.cancel();
+            }
+        });
+    }
 }
