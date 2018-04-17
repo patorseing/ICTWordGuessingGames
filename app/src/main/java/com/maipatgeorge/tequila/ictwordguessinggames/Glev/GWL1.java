@@ -414,7 +414,7 @@ public class GWL1 extends AppCompatActivity {
         congrats.setEnabled(true);
 
         linearLayout = new LinearLayout(GWL1.this);
-        linearLayout = (LinearLayout) dialog.findViewById(R.id.l2);
+        linearLayout2 = (LinearLayout) dialog.findViewById(R.id.l2);
         linearLayout.setEnabled(true);
 
         back = (Button) dialog.findViewById(R.id.conback);

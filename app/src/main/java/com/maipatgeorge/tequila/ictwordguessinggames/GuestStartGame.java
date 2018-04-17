@@ -1,5 +1,6 @@
 package com.maipatgeorge.tequila.ictwordguessinggames;
 
+import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
@@ -42,6 +43,8 @@ public class GuestStartGame extends AppCompatActivity
     Button se_guest;
     Button db_guest;
     String getName;
+
+    Dialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -200,6 +203,8 @@ public class GuestStartGame extends AppCompatActivity
             // Handle the camera action
         } else if (id == R.id.nav_edit) {
 
+            myDialogs();
+
         } else if (id == R.id.nav_back) {
             new Handler().postDelayed(new Runnable() {
                 @Override
@@ -225,6 +230,11 @@ public class GuestStartGame extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void myDialogs(){
+        dialog = new Dialog(GuestStartGame.this);
+        dialog.setContentView(R.layout.dialogscongres);
     }
 }
 
