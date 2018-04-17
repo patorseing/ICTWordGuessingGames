@@ -17,7 +17,15 @@ public class GuestDB extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fbuser_db);
+        setContentView(R.layout.activity_guest_db);
+
+        intent = getIntent();
+        bd = intent.getExtras();
+
+        if(bd != null)
+        {
+            getName = (String) bd.get("name");
+        }
 
         getSupportActionBar().setTitle("ICT game");
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -38,13 +46,6 @@ public class GuestDB extends AppCompatActivity {
                 @Override
                 public void run() {
                     Intent welcome = new Intent(GuestDB.this, GuestStartGame.class);
-                    intent = getIntent();
-                    bd = intent.getExtras();
-
-                    if(bd != null)
-                    {
-                        getName = (String) bd.get("name");
-                    }
                     welcome.putExtra("name", getName);
                     startActivity(welcome);
                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
