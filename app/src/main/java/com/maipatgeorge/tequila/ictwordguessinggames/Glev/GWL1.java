@@ -1,5 +1,6 @@
 package com.maipatgeorge.tequila.ictwordguessinggames.Glev;
 
+import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
@@ -71,6 +72,8 @@ public class GWL1 extends AppCompatActivity {
 
     ImageButton share;
     ImageView imageView;
+
+    Dialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -311,6 +314,29 @@ public class GWL1 extends AppCompatActivity {
                         db.close();
                         db1.close();
                     }
+
+                    /*
+                    AlertDialog.Builder builder = new AlertDialog.Builder(GWL1.this);
+
+                    builder.setTitle("ICT game");
+                    builder.setMessage("Hi").setCancelable(false).setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                        }
+                    }).setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int i) {
+                            dialog.dismiss();
+                        }
+                    });
+
+                    AlertDialog alertDialog= builder.create();
+                    alertDialog.show();
+                    */
+
+
+
                 } else {
                     for (int i = 0; i < Space.length; i++){
                         for (int j = 0; j < type.length; j++){
@@ -385,4 +411,7 @@ public class GWL1 extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void MyAlertDialog(){
+        dialog = new Dialog(GWL1.this);
+    }
 }
