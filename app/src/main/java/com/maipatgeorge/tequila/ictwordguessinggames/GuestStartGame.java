@@ -22,6 +22,7 @@ import android.widget.TextView;
 
 import com.maipatgeorge.tequila.ictwordguessinggames.DB.DBHelper;
 import com.maipatgeorge.tequila.ictwordguessinggames.freg.RenameDialogsFreg;
+import com.maipatgeorge.tequila.ictwordguessinggames.freg.SettingDialogsFreg;
 
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_CAT;
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_Gname;
@@ -240,6 +241,8 @@ public class GuestStartGame extends AppCompatActivity
                 dialogs.show(fragmentTransaction, "MyCustomerDialogs");
                 break;
             case R.id.nav_setting:
+                SettingDialogsFreg dialogsFreg = new SettingDialogsFreg();
+                dialogsFreg.show(fragmentTransaction, "MyCustomerDialogs");
                 break;
         }
     }
