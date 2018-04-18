@@ -1,6 +1,5 @@
 package com.maipatgeorge.tequila.ictwordguessinggames;
 
-import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
@@ -8,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -21,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.maipatgeorge.tequila.ictwordguessinggames.DB.DBHelper;
+import com.maipatgeorge.tequila.ictwordguessinggames.freg.Rename;
 
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_CAT;
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_Gname;
@@ -44,7 +46,7 @@ public class GuestStartGame extends AppCompatActivity
     Button db_guest;
     String getName;
 
-    Dialog dialog;
+    Fragment fragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -199,12 +201,11 @@ public class GuestStartGame extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+
         if (id == R.id.nav_edit) {
-            // Handle the camera action
-        } else if (id == R.id.nav_edit) {
-
-            myDialogs();
-
+            displaySelectedScreen(R.id.nav_edit);
+        } else if (id == R.id.nav_setting) {
+            displaySelectedScreen(R.id.nav_setting);
         } else if (id == R.id.nav_back) {
             new Handler().postDelayed(new Runnable() {
                 @Override
@@ -221,9 +222,7 @@ public class GuestStartGame extends AppCompatActivity
             String sql = "DELETE FROM "+TABLE_GuestPass+" WHERE "+KEY_Gname+" = ? and " + KEY_L_ID +" = 1";
 
             db.execSQL(sql, new String[]{getName});
-        } /*else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+        } /*else if (id == R.id.nav_send) {
 
         }*/
 
@@ -232,9 +231,23 @@ public class GuestStartGame extends AppCompatActivity
         return true;
     }
 
-    public void myDialogs(){
-        dialog = new Dialog(GuestStartGame.this);
-        dialog.setContentView(R.layout.dialogscongres);
+    private void displaySelectedScreen(int id){
+
+        fragment = null;
+
+        switch (id){
+            case R.id.nav_edit:
+                fragment = new Rename();
+                break;
+            case R.id.nav_setting:
+                break;
+        }
+
+        if (fragment != null){
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.content_guest_start_game, fragment);
+            fragmentTransaction.commit();
+        }
     }
 }
 

@@ -8,6 +8,7 @@
             android:id="@+id/nav_back"
             android:icon="@drawable/ic_arrow_back_black_24dp"
             android:title="Back" />
+
         <item
             android:id="@+id/nav_edit"
             android:icon="@drawable/ic_edit_black_24dp"
