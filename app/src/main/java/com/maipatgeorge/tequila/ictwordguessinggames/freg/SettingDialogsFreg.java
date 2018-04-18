@@ -1,4 +1,6 @@
 package com.maipatgeorge.tequila.ictwordguessinggames.freg;
 
-public class SettingDialogsFreg {
+import android.support.v4.app.DialogFragment;
+
+public class SettingDialogsFreg extends DialogFragment {
 }
