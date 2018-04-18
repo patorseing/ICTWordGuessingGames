@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -22,7 +21,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.maipatgeorge.tequila.ictwordguessinggames.DB.DBHelper;
-import com.maipatgeorge.tequila.ictwordguessinggames.freg.Rename;
+import com.maipatgeorge.tequila.ictwordguessinggames.freg.RenameDialogsFreg;
 
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_CAT;
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_Gname;
@@ -36,7 +35,7 @@ public class GuestStartGame extends AppCompatActivity
 
     ImageView imageView;
     NavigationView navigationView;
-    TextView name;
+    public TextView name;
     DBHelper helper;
     Intent intent;
     Bundle bd;
@@ -45,8 +44,6 @@ public class GuestStartGame extends AppCompatActivity
     Button se_guest;
     Button db_guest;
     String getName;
-
-    Fragment fragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -232,23 +229,21 @@ public class GuestStartGame extends AppCompatActivity
     }
 
     private void displaySelectedScreen(int id){
-
-        fragment = null;
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
 
         switch (id){
             case R.id.nav_edit:
-                fragment = new Rename();
+                RenameDialogsFreg dialogs = new RenameDialogsFreg();
+                Bundle bundle = new Bundle();
+                bundle.putString("oldname", getName);
+                dialogs.setArguments(bundle);
+                dialogs.show(fragmentTransaction, "MyCustomerDialogs");
                 break;
             case R.id.nav_setting:
                 break;
         }
-
-        if (fragment != null){
-            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.content_guest_start_game, fragment);
-            fragmentTransaction.commit();
-        }
     }
+
 }
 
 

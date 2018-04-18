@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -83,6 +84,8 @@ public class GWL1 extends AppCompatActivity {
 
     LinearLayout linearLayout;
     LinearLayout linearLayout2;
+
+    MediaPlayer mysong;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -423,6 +426,9 @@ public class GWL1 extends AppCompatActivity {
         stay.setEnabled(true);
         dialog.show();
 
+        mysong = MediaPlayer.create(this, R.raw.correct);
+        mysong.start();
+
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -432,6 +438,7 @@ public class GWL1 extends AppCompatActivity {
                         Intent welcome = new Intent(GWL1.this, GuestWL.class);
                         welcome.putExtra("name", getName);
                         startActivity(welcome);
+                        mysong.stop();
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         finish();
                     }
