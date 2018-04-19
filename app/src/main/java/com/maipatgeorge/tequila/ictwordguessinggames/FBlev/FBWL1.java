@@ -1,4 +1,4 @@
-package com.maipatgeorge.tequila.ictwordguessinggames.Glev;
+package com.maipatgeorge.tequila.ictwordguessinggames.FBlev;
 
 import android.app.Dialog;
 import android.content.ContentValues;
@@ -22,7 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.maipatgeorge.tequila.ictwordguessinggames.DB.DBHelper;
-import com.maipatgeorge.tequila.ictwordguessinggames.GuestWL;
+import com.maipatgeorge.tequila.ictwordguessinggames.FBuserWL;
 import com.maipatgeorge.tequila.ictwordguessinggames.R;
 import com.maipatgeorge.tequila.ictwordguessinggames.Screenshot;
 import com.maipatgeorge.tequila.ictwordguessinggames.util.GifImageView;
@@ -32,20 +32,20 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_Gname;
+import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_F_ID;
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_ID;
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_LEVEL;
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_L_ID;
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_catID;
-import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.TABLE_GuestPass;
+import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.TABLE_FbuserPass;
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.TABLE_Level;
 
-public class GWL1 extends AppCompatActivity {
-
+public class FBWL1 extends AppCompatActivity {
     Intent intent;
     Bundle bd;
 
     String getName;
+    String fbid;
 
     DBHelper helper;
 
@@ -101,11 +101,11 @@ public class GWL1 extends AppCompatActivity {
         helper = new DBHelper(this);
 
         intent = getIntent();
-        bd = intent.getExtras();
 
-        if(bd != null)
-        {
+        bd = intent.getExtras();
+        if(bd != null) {
             getName = (String) bd.get("name");
+            fbid = (String) bd.get("id");
         }
 
 
@@ -115,7 +115,7 @@ public class GWL1 extends AppCompatActivity {
 
         float log1=(float)(Math.log(100-volume)/Math.log(volume));
 
-        mysong = MediaPlayer.create(GWL1.this, R.raw.feelingsohappy);
+        mysong = MediaPlayer.create(FBWL1.this, R.raw.feelingsohappy);
         mysong.seekTo(pos);
         mysong.start();
         mysong.setVolume(1 - log1, 1 - log1);
@@ -157,10 +157,10 @@ public class GWL1 extends AppCompatActivity {
 
         final TextView[] Space = new TextView[]{s1, s2, s3, s4, s5, s6, s7};
 
-        String sql = "SELECT  * FROM "+TABLE_GuestPass+" WHERE "+KEY_Gname+" = ? and " + KEY_L_ID +" = 1";
+        String sql = "SELECT  * FROM "+TABLE_FbuserPass+" WHERE "+KEY_F_ID+" = ? and " + KEY_L_ID +" = 1";
         SQLiteDatabase db1 = helper.getReadableDatabase();
 
-        Cursor cursor1 = db1.rawQuery(sql, new String[]{getName});
+        Cursor cursor1 = db1.rawQuery(sql, new String[]{fbid});
 
         if (cursor1.getCount() > 0)
         {
@@ -328,10 +328,10 @@ public class GWL1 extends AppCompatActivity {
                     count++;
                 }
                 if (count == Space.length){
-                    String sql = "SELECT  * FROM "+TABLE_GuestPass+" WHERE "+KEY_Gname+" = ? and " + KEY_L_ID +" = 1";
+                    String sql = "SELECT  * FROM "+TABLE_FbuserPass+" WHERE "+KEY_F_ID+" = ? and " + KEY_L_ID +" = 1";
                     SQLiteDatabase db1 = helper.getReadableDatabase();
 
-                    Cursor cursor1 = db1.rawQuery(sql, new String[]{getName});
+                    Cursor cursor1 = db1.rawQuery(sql, new String[]{fbid});
 
                     String id[] = new String[cursor1.getCount()];
                     if (cursor1.getCount() > 0) {
@@ -339,9 +339,9 @@ public class GWL1 extends AppCompatActivity {
                     } else {
                         SQLiteDatabase db = helper.getWritableDatabase();
                         ContentValues values = new ContentValues();
-                        values.put(KEY_Gname, getName);
+                        values.put(KEY_F_ID, fbid);
                         values.put(KEY_L_ID, 1);
-                        db.insertOrThrow(TABLE_GuestPass, null, values);
+                        db.insertOrThrow(TABLE_FbuserPass, null, values);
                         db.close();
                         db1.close();
                     }
@@ -395,42 +395,20 @@ public class GWL1 extends AppCompatActivity {
         startActivity(Intent.createChooser(intent, "share image"));
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if(id == android.R.id.home){
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    Intent welcome = new Intent(GWL1.this, GuestWL.class);
-                    welcome.putExtra("name", getName);
-                    welcome.putExtra("start", start);
-                    welcome.putExtra("volume", volume);
-                    welcome.putExtra("pos", mysong.getCurrentPosition());
-                    startActivity(welcome);
-                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                    finish();
-                }
-            }, 10);
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
     public void myDialogs(){
-        dialog = new Dialog(GWL1.this);
+        dialog = new Dialog(FBWL1.this);
         dialog.setContentView(R.layout.dialogscongres);
 
-        linearLayout = new LinearLayout(GWL1.this);
+        linearLayout = new LinearLayout(FBWL1.this);
         linearLayout = (LinearLayout) dialog.findViewById(R.id.l1);
         linearLayout.setEnabled(true);
 
-        congrats = new GifImageView(GWL1.this);
+        congrats = new GifImageView(FBWL1.this);
         congrats = (GifImageView) dialog.findViewById(R.id.congratss);
         congrats.setGifImageResource(R.drawable.congratulation);
         congrats.setEnabled(true);
 
-        linearLayout = new LinearLayout(GWL1.this);
+        linearLayout = new LinearLayout(FBWL1.this);
         linearLayout2 = (LinearLayout) dialog.findViewById(R.id.l2);
         linearLayout.setEnabled(true);
 
@@ -452,8 +430,9 @@ public class GWL1 extends AppCompatActivity {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        Intent welcome = new Intent(GWL1.this, GuestWL.class);
+                        Intent welcome = new Intent(FBWL1.this, FBuserWL.class);
                         welcome.putExtra("name", getName);
+                        welcome.putExtra("id", fbid);
                         welcome.putExtra("start", start);
                         welcome.putExtra("volume", volume);
                         welcome.putExtra("pos", mysong.getCurrentPosition());
@@ -475,6 +454,29 @@ public class GWL1 extends AppCompatActivity {
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if(id == android.R.id.home){
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent welcome = new Intent(FBWL1.this, FBuserWL.class);
+                    welcome.putExtra("name", getName);
+                    welcome.putExtra("id", fbid);
+                    welcome.putExtra("start", start);
+                    welcome.putExtra("volume", volume);
+                    welcome.putExtra("pos", mysong.getCurrentPosition());
+                    startActivity(welcome);
+                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                    finish();
+                }
+            }, 10);
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     protected void onPause(){
         super.onPause();
         mysong.stop();
@@ -484,4 +486,5 @@ public class GWL1 extends AppCompatActivity {
         super.onStop();
         mysong.stop();
     }
+
 }

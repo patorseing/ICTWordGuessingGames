@@ -55,6 +55,9 @@
         <activity android:name=".Glev.GWL1"
             android:screenOrientation="portrait"
             android:hardwareAccelerated="false"></activity>
+        <activity android:name=".FBlev.FBWL1"
+            android:screenOrientation="portrait"
+            android:hardwareAccelerated="false"></activity>
     </application>
 
 </manifest>

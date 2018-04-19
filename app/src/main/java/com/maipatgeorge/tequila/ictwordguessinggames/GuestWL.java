@@ -11,7 +11,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.maipatgeorge.tequila.ictwordguessinggames.DB.DBHelper;
 import com.maipatgeorge.tequila.ictwordguessinggames.Glev.GWL1;
@@ -29,7 +28,6 @@ public class GuestWL extends AppCompatActivity {
     Bundle bd;
 
     String getName;
-    TextView textView;
 
 
     DBHelper helper;
@@ -73,8 +71,6 @@ public class GuestWL extends AppCompatActivity {
         if (!start.equals("true")){
             mysong.stop();
         }
-
-        textView = (TextView) findViewById(R.id.guest_wl);
 
         intent = getIntent();
         bd = intent.getExtras();

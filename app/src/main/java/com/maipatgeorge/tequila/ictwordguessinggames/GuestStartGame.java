@@ -27,7 +27,6 @@ import com.maipatgeorge.tequila.ictwordguessinggames.freg.SettingDialogsFreg;
 
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_CAT;
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_Gname;
-import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_L_ID;
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.TABLE_Category;
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.TABLE_GuestPass;
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.cat_name;
@@ -252,7 +251,7 @@ public class GuestStartGame extends AppCompatActivity
         } else if (id == R.id.nav_reset) {
             SQLiteDatabase db = helper.getWritableDatabase();
 
-            String sql = "DELETE FROM "+TABLE_GuestPass+" WHERE "+KEY_Gname+" = ? and " + KEY_L_ID +" = 1";
+            String sql = "DELETE FROM "+TABLE_GuestPass+" WHERE "+KEY_Gname+" = ? ";
 
             db.execSQL(sql, new String[]{getName});
         } /*else if (id == R.id.nav_send) {

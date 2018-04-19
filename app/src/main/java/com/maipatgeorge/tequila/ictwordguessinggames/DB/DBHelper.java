@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_CAT;
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_FBID;
+import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_F_ID;
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_Gname;
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_ID;
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_LEVEL;
@@ -15,6 +16,7 @@ import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_TOKE
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_catID;
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.TABLE_Category;
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.TABLE_Fbuser;
+import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.TABLE_FbuserPass;
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.TABLE_Guest;
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.TABLE_GuestPass;
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.TABLE_Level;
@@ -25,7 +27,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String LOG = "DBHelper";
 
     // Database Version
-    private static final int DB_VERSION = 19;
+    private static final int DB_VERSION = 20;
 
     // Database Name
     private static final String DB_NAME = "ICT_game.db";
@@ -55,13 +57,9 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String CREATE_TABLE_GuestPass = "CREATE TABLE " + TABLE_GuestPass + "( " + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + KEY_Gname + " TEXT, " + KEY_L_ID +" INTEGER )";
 
-    /*
     //FbuserPass table create statement
-    private static final String CREATE_TABLE_FbuserPass = "CREATE TABLE "
-            + TABLE_FbuserPass + "(" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, FOREIGN KEY ("
-            + KEY_F_ID+") REFERENCES " +TABLE_Fbuser+" ("+KEY_ID+"), FOREIGN KEY ("
-            + KEY_L_ID +") REFERENCES " +TABLE_Level+" ("+KEY_ID+"))";
-    */
+    private static final String CREATE_TABLE_FbuserPass = "CREATE TABLE " + TABLE_FbuserPass + "(" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + KEY_F_ID+" TEXT, " + KEY_L_ID +" INTEGER )";
 
     public DBHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -75,7 +73,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_CATEGORY);
         db.execSQL(CREATE_TABLE_LEVEL);
         db.execSQL(CREATE_TABLE_GuestPass);
-        //db.execSQL(CREATE_TABLE_FbuserPass);
+        db.execSQL(CREATE_TABLE_FbuserPass);
     }
 
     @Override
@@ -86,7 +84,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_Category);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_Level);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_GuestPass);
-        //db.execSQL("DROP TABLE IF EXISTS " + TABLE_FbuserPass);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_FbuserPass);
 
         // create new tables
         onCreate(db);

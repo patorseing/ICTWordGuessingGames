@@ -26,7 +26,9 @@ import com.maipatgeorge.tequila.ictwordguessinggames.freg.FBSettingDialogsFreg;
 import com.squareup.picasso.Picasso;
 
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_CAT;
+import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_F_ID;
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.TABLE_Category;
+import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.TABLE_FbuserPass;
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.cat_name;
 
 public class FBuserStartGame extends AppCompatActivity
@@ -94,7 +96,7 @@ public class FBuserStartGame extends AppCompatActivity
             id2 = (String) bd.get("id");
             name.setText(getName);
 
-            //Picasso.with(this).load( "https://graph.facebook.com/"+id+"/picture?type=small").into((Target) profilePictureView);
+            //Picasso.with(this).load( "https://graph.facebook.com/"+id2+"/picture?type=small").into(profilePictureView);
             Picasso.with(this).load("https://graph.facebook.com/"+id2+"/picture?type=large").into(profilePictureView);
         }
 
@@ -267,7 +269,11 @@ public class FBuserStartGame extends AppCompatActivity
                 }
             }, 10);
         } else if (id == R.id.nav_resetFB) {
+            SQLiteDatabase db = helper.getWritableDatabase();
 
+            String sql = "DELETE FROM "+TABLE_FbuserPass+" WHERE "+KEY_F_ID+" = ?";
+
+            db.execSQL(sql, new String[]{id2});
         } /*else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_share) {
