@@ -6,6 +6,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.ImageView;
+
+import com.maipatgeorge.tequila.ictwordguessinggames.DB.DBHelper;
 
 public class GuestSEC extends AppCompatActivity {
 
@@ -18,6 +22,20 @@ public class GuestSEC extends AppCompatActivity {
     String start;
     int volume;
     int pos;
+
+    DBHelper helper;
+
+    ImageView correct1;
+    ImageView correct2;
+    ImageView correct3;
+    ImageView correct4;
+    ImageView correct5;
+    ImageView correct6;
+    ImageView correct7;
+    ImageView correct8;
+    ImageView correct9;
+
+    Button lv1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +63,14 @@ public class GuestSEC extends AppCompatActivity {
         getSupportActionBar().setTitle("ICT game");
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        bd = intent.getExtras();
+
+        if(bd != null)
+        {
+            getName = (String) bd.get("name");
+        }
+
     }
 
 
