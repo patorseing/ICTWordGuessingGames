@@ -72,6 +72,19 @@ public class FBuserStartGame extends AppCompatActivity
 
         intent = getIntent();
 
+        bd = intent.getExtras();
+
+
+        if(bd != null)
+        {
+            getName = (String) bd.get("name");
+            id2 = (String) bd.get("id");
+            name.setText(getName);
+
+            //Picasso.with(this).load( "https://graph.facebook.com/"+id2+"/picture?type=small").into(profilePictureView);
+            Picasso.with(this).load("https://graph.facebook.com/"+id2+"/picture?type=large").into(profilePictureView);
+        }
+
         start = intent.getStringExtra("start");
         volume = intent.getIntExtra("volume", 0);
         pos = intent.getIntExtra("pos", 0);
@@ -85,19 +98,6 @@ public class FBuserStartGame extends AppCompatActivity
 
         if (!start.equals("true")){
             mysong.stop();
-        }
-
-        bd = intent.getExtras();
-
-
-        if(bd != null)
-        {
-            getName = (String) bd.get("name");
-            id2 = (String) bd.get("id");
-            name.setText(getName);
-
-            //Picasso.with(this).load( "https://graph.facebook.com/"+id2+"/picture?type=small").into(profilePictureView);
-            Picasso.with(this).load("https://graph.facebook.com/"+id2+"/picture?type=large").into(profilePictureView);
         }
 
         /*

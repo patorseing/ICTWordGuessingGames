@@ -11,4 +11,4 @@ https://stackoverflow.com/questions/5215459/android-mediaplayer-setvolume-functi
 
 import com.felipecsl.gifimageview.library.GifImageView; : for run gif photo(https://github.com/felipecsl/GifImageView/blob/master/library/src/main/java/com/felipecsl/gifimageview/library/GifImageView.java)
 
-and other in youtube
+and other in youtube and stackoverflow
