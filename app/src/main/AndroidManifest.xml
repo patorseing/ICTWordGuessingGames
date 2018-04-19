@@ -5,8 +5,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
     <uses-permission android:name="android.permission.SET_WALLPAPER_HINTS" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -15,7 +15,8 @@
         android:roundIcon="@mipmap/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,8 +24,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".OpeningMenu"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".OpeningMenu"
+            android:screenOrientation="portrait" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
@@ -33,31 +35,40 @@
         <activity
             android:name=".GuestStartGame"
             android:label="@string/title_activity_guest_start_game"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".FBuserStartGame"
             android:label="@string/title_activity_fbuser_start_game"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".GuestDB"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".GuestWL"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".GuestSEC"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".FBuserWL"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".FBuserSEC"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".FBuserDB"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Glev.GWL1"
             android:screenOrientation="portrait"
-            android:hardwareAccelerated="false"></activity>
-        <activity android:name=".FBlev.FBWL1"
-            android:screenOrientation="portrait"
-            android:hardwareAccelerated="false"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".GuestDB"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".GuestWL"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".GuestSEC"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".FBuserWL"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".FBuserSEC"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".FBuserDB"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Glev.GWL1"
+            android:hardwareAccelerated="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".FBlev.FBWL1"
+            android:hardwareAccelerated="false"
+            android:screenOrientation="portrait" />
+        <activity android:name=".Glev.GSEC1"></activity>
     </application>
 
 </manifest>
