@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -51,9 +52,32 @@ public class OpeningMenu extends AppCompatActivity {
 
     DBHelper helper;
 
+    MediaPlayer mysong;
+    String start;
+    int volume;
+    int pos;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Intent intent = getIntent();
+
+        start = intent.getStringExtra("start");
+        volume = intent.getIntExtra("volume", 0);
+        pos = intent.getIntExtra("pos", 0);
+
+        float log1=(float)(Math.log(100-volume)/Math.log(volume));
+
+        mysong = MediaPlayer.create(OpeningMenu.this, R.raw.feelingsohappy);
+        mysong.seekTo(pos);
+        mysong.start();
+        mysong.setVolume(1 - log1, 1 - log1);
+        mysong.setLooping(true);
+
+        if (!start.equals("true")){
+            mysong.stop();
+        }
 
         //FacebookSdk.sdkInitialize(getApplicationContext());
         FacebookSdk.getApplicationContext();
@@ -117,6 +141,9 @@ public class OpeningMenu extends AppCompatActivity {
                                                 Intent welcome = new Intent(OpeningMenu.this, FBuserStartGame.class);
                                                 welcome.putExtra("name", fbUserName);
                                                 welcome.putExtra("id", fbUserId);
+                                                welcome.putExtra("start", start);
+                                                welcome.putExtra("volume", volume);
+                                                welcome.putExtra("pos", mysong.getCurrentPosition());
                                                 startActivity(welcome);
                                                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                                                 finish();
@@ -138,6 +165,9 @@ public class OpeningMenu extends AppCompatActivity {
                                                 Intent welcome = new Intent(OpeningMenu.this, FBuserStartGame.class);
                                                 welcome.putExtra("name", fbUserName);
                                                 welcome.putExtra("id", fbUserId);
+                                                welcome.putExtra("start", start);
+                                                welcome.putExtra("volume", volume);
+                                                welcome.putExtra("pos", mysong.getCurrentPosition());
                                                 startActivity(welcome);
                                                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                                                 finish();
@@ -198,6 +228,9 @@ public class OpeningMenu extends AppCompatActivity {
                     public void run() {
                         Intent welcome = new Intent(OpeningMenu.this, GuestStartGame.class);
                         welcome.putExtra("name", name);
+                        welcome.putExtra("start", start);
+                        welcome.putExtra("volume", volume);
+                        welcome.putExtra("pos", mysong.getCurrentPosition());
                         startActivity(welcome);
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         finish();
@@ -235,6 +268,9 @@ public class OpeningMenu extends AppCompatActivity {
                         public void run() {
                             Intent welcome = new Intent(OpeningMenu.this, GuestStartGame.class);
                             welcome.putExtra("name", name);
+                            welcome.putExtra("start", start);
+                            welcome.putExtra("volume", volume);
+                            welcome.putExtra("pos", mysong.getCurrentPosition());
                             startActivity(welcome);
                             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                             finish();
@@ -257,6 +293,7 @@ public class OpeningMenu extends AppCompatActivity {
     @Override
     protected void onResume(){
         super.onResume();
+        mysong.start();
         Profile profile = Profile.getCurrentProfile();
         nextActivity(profile);
     }
@@ -264,10 +301,12 @@ public class OpeningMenu extends AppCompatActivity {
     @Override
     protected void onPause(){
         super.onPause();
+        mysong.stop();
     }
 
     protected void onStop(){
         super.onStop();
+        mysong.stop();
         accessTokenTracker.stopTracking();
         profileTracker.stopTracking();
     }

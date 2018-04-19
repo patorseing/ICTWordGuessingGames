@@ -16,17 +16,18 @@ import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.Toast;
 
-import com.maipatgeorge.tequila.ictwordguessinggames.GuestStartGame;
+import com.maipatgeorge.tequila.ictwordguessinggames.FBuserStartGame;
 import com.maipatgeorge.tequila.ictwordguessinggames.R;
 
-public class SettingDialogsFreg extends DialogFragment {
+public class FBSettingDialogsFreg extends DialogFragment {
 
     Switch aSwitch;
     SeekBar seekBar;
     Button button;
 
     MediaPlayer mysong;
-    String oldname;
+    String name;
+    String id;
     String start;
     int volume;
     int pos;
@@ -37,7 +38,9 @@ public class SettingDialogsFreg extends DialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.dialogsetting, container,false);
 
-        oldname  = getArguments().getString("oldname").toString();
+        name  = getArguments().getString("name").toString();
+        id  = getArguments().getString("id").toString();
+        start  = getArguments().getString("start").toString();
         start  = getArguments().getString("start").toString();
         volume  = getArguments().getInt("volume");
         pos  = getArguments().getInt("pos");
@@ -113,8 +116,9 @@ public class SettingDialogsFreg extends DialogFragment {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        Intent welcome = new Intent(getActivity(), GuestStartGame.class);
-                        welcome.putExtra("name", oldname);
+                        Intent welcome = new Intent(getActivity(), FBuserStartGame.class);
+                        welcome.putExtra("name", name);
+                        welcome.putExtra("id", id);
                         welcome.putExtra("start", start);
                         welcome.putExtra("volume", volume);
                         welcome.putExtra("pos", mysong.getCurrentPosition());
@@ -135,3 +139,4 @@ public class SettingDialogsFreg extends DialogFragment {
         mysong.stop();
     }
 }
+

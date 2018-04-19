@@ -4,9 +4,11 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -20,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.maipatgeorge.tequila.ictwordguessinggames.DB.DBHelper;
+import com.maipatgeorge.tequila.ictwordguessinggames.freg.FBSettingDialogsFreg;
 import com.squareup.picasso.Picasso;
 
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_CAT;
@@ -44,7 +47,12 @@ public class FBuserStartGame extends AppCompatActivity
     Button db_fbuser;
 
     String getName;
-    String id;
+    String id2;
+
+    MediaPlayer mysong;
+    String start;
+    int volume;
+    int pos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,17 +69,33 @@ public class FBuserStartGame extends AppCompatActivity
 
 
         intent = getIntent();
+
+        start = intent.getStringExtra("start");
+        volume = intent.getIntExtra("volume", 0);
+        pos = intent.getIntExtra("pos", 0);
+
+        float log1=(float)(Math.log(100-volume)/Math.log(volume));
+
+        mysong = MediaPlayer.create(FBuserStartGame.this, R.raw.feelingsohappy);
+        mysong.start();
+        mysong.setVolume(1-log1, 1-log1);
+        mysong.setLooping(true);
+
+        if (!start.equals("true")){
+            mysong.stop();
+        }
+
         bd = intent.getExtras();
 
 
         if(bd != null)
         {
             getName = (String) bd.get("name");
-            id = (String) bd.get("id");
+            id2 = (String) bd.get("id");
             name.setText(getName);
 
             //Picasso.with(this).load( "https://graph.facebook.com/"+id+"/picture?type=small").into((Target) profilePictureView);
-            Picasso.with(this).load("https://graph.facebook.com/"+id+"/picture?type=large").into(profilePictureView);
+            Picasso.with(this).load("https://graph.facebook.com/"+id2+"/picture?type=large").into(profilePictureView);
         }
 
         /*
@@ -121,7 +145,10 @@ public class FBuserStartGame extends AppCompatActivity
                     public void run() {
                         Intent welcome = new Intent(FBuserStartGame.this, FBuserWL.class);
                         welcome.putExtra("name", getName);
-                        welcome.putExtra("id", id);
+                        welcome.putExtra("id", id2);
+                        welcome.putExtra("start", start);
+                        welcome.putExtra("volume", volume);
+                        welcome.putExtra("pos", mysong.getCurrentPosition());
                         startActivity(welcome);
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         finish();
@@ -140,7 +167,10 @@ public class FBuserStartGame extends AppCompatActivity
                     public void run() {
                         Intent welcome = new Intent(FBuserStartGame.this, FBuserSEC.class);
                         welcome.putExtra("name", getName);
-                        welcome.putExtra("id", id);
+                        welcome.putExtra("id", id2);
+                        welcome.putExtra("start", start);
+                        welcome.putExtra("volume", volume);
+                        welcome.putExtra("pos", mysong.getCurrentPosition());
                         startActivity(welcome);
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         finish();
@@ -159,7 +189,10 @@ public class FBuserStartGame extends AppCompatActivity
                     public void run() {
                         Intent welcome = new Intent(FBuserStartGame.this, FBuserDB.class);
                         welcome.putExtra("name", getName);
-                        welcome.putExtra("id", id);
+                        welcome.putExtra("id", id2);
+                        welcome.putExtra("start", start);
+                        welcome.putExtra("volume", volume);
+                        welcome.putExtra("pos", mysong.getCurrentPosition());
                         startActivity(welcome);
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         finish();
@@ -208,13 +241,26 @@ public class FBuserStartGame extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_settingFB) {
-            // Handle the camera action
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            FBSettingDialogsFreg dialogsFreg = new FBSettingDialogsFreg();
+            Bundle bundle2 = new Bundle();
+            bundle2.putString("name", getName);
+            bundle2.putString("id", id2);
+            bundle2.putString("start", start);
+            bundle2.putInt("volume", volume);
+            bundle2.putInt("pos", mysong.getCurrentPosition());
+            dialogsFreg.setArguments(bundle2);
+            mysong.stop();
+            dialogsFreg.show(fragmentTransaction, "MyCustomerDialogs");
         } else if (id == R.id.nav_out) {
             //LoginManager.getInstance().logOut();
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     Intent welcome = new Intent(FBuserStartGame.this, OpeningMenu.class);
+                    welcome.putExtra("start", start);
+                    welcome.putExtra("volume", volume);
+                    welcome.putExtra("pos", mysong.getCurrentPosition());
                     startActivity(welcome);
                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                     finish();
@@ -233,5 +279,17 @@ public class FBuserStartGame extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mysong.stop();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mysong.stop();
     }
 }

@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
@@ -46,9 +47,32 @@ public class GuestStartGame extends AppCompatActivity
     Button db_guest;
     String getName;
 
+    MediaPlayer mysong;
+    String start;
+    int volume;
+    int pos;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        intent = getIntent();
+
+        start = intent.getStringExtra("start");
+        volume = intent.getIntExtra("volume", 0);
+        pos = intent.getIntExtra("pos", 0);
+
+        float log1=(float)(Math.log(100-volume)/Math.log(volume));
+
+        mysong = MediaPlayer.create(GuestStartGame.this, R.raw.feelingsohappy);
+        mysong.start();
+        mysong.setVolume(1-log1, 1-log1);
+        mysong.setLooping(true);
+
+        if (!start.equals("true")){
+            mysong.stop();
+        }
+
         setContentView(R.layout.activity_guest_start_game);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -58,7 +82,6 @@ public class GuestStartGame extends AppCompatActivity
         name = navigationView.getHeaderView(0).findViewById(R.id.guestname);
         helper = new DBHelper(this);
 
-        intent = getIntent();
         bd = intent.getExtras();
 
         if(bd != null)
@@ -113,6 +136,9 @@ public class GuestStartGame extends AppCompatActivity
                     public void run() {
                         Intent welcome = new Intent(GuestStartGame.this, GuestWL.class);
                         welcome.putExtra("name", getName);
+                        welcome.putExtra("start", start);
+                        welcome.putExtra("volume", volume);
+                        welcome.putExtra("pos", mysong.getCurrentPosition());
                         startActivity(welcome);
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         finish();
@@ -131,6 +157,9 @@ public class GuestStartGame extends AppCompatActivity
                     public void run() {
                         Intent welcome = new Intent(GuestStartGame.this, GuestSEC.class);
                         welcome.putExtra("name", getName);
+                        welcome.putExtra("start", start);
+                        welcome.putExtra("volume", volume);
+                        welcome.putExtra("pos", mysong.getCurrentPosition());
                         startActivity(welcome);
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         finish();
@@ -149,6 +178,9 @@ public class GuestStartGame extends AppCompatActivity
                     public void run() {
                         Intent welcome = new Intent(GuestStartGame.this, GuestDB.class);
                         welcome.putExtra("name", getName);
+                        welcome.putExtra("start", start);
+                        welcome.putExtra("volume", volume);
+                        welcome.putExtra("pos", mysong.getCurrentPosition());
                         startActivity(welcome);
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         finish();
@@ -209,6 +241,9 @@ public class GuestStartGame extends AppCompatActivity
                 @Override
                 public void run() {
                     Intent welcome = new Intent(GuestStartGame.this, OpeningMenu.class);
+                    welcome.putExtra("start", start);
+                    welcome.putExtra("volume", volume);
+                    welcome.putExtra("pos", mysong.getCurrentPosition());
                     startActivity(welcome);
                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                     finish();
@@ -237,16 +272,38 @@ public class GuestStartGame extends AppCompatActivity
                 RenameDialogsFreg dialogs = new RenameDialogsFreg();
                 Bundle bundle = new Bundle();
                 bundle.putString("oldname", getName);
+                bundle.putString("start", start);
+                bundle.putInt("volume", volume);
+                bundle.putInt("pos", mysong.getCurrentPosition());
                 dialogs.setArguments(bundle);
+                mysong.stop();
                 dialogs.show(fragmentTransaction, "MyCustomerDialogs");
                 break;
             case R.id.nav_setting:
                 SettingDialogsFreg dialogsFreg = new SettingDialogsFreg();
+                Bundle bundle2 = new Bundle();
+                bundle2.putString("oldname", getName);
+                bundle2.putString("start", start);
+                bundle2.putInt("volume", volume);
+                bundle2.putInt("pos", mysong.getCurrentPosition());
+                dialogsFreg.setArguments(bundle2);
+                mysong.stop();
                 dialogsFreg.show(fragmentTransaction, "MyCustomerDialogs");
                 break;
         }
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mysong.stop();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mysong.start();
+    }
 }
 
 

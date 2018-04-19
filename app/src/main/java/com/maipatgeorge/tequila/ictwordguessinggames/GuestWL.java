@@ -3,10 +3,10 @@ package com.maipatgeorge.tequila.ictwordguessinggames;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -46,10 +46,33 @@ public class GuestWL extends AppCompatActivity {
 
     Button lv1;
 
+    MediaPlayer mysong;
+    String start;
+    int volume;
+    int pos;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guest_wl);
+
+        intent = getIntent();
+
+        start = intent.getStringExtra("start");
+        volume = intent.getIntExtra("volume", 0);
+        pos = intent.getIntExtra("pos", 0);
+
+        float log1=(float)(Math.log(100-volume)/Math.log(volume));
+
+        mysong = MediaPlayer.create(GuestWL.this, R.raw.feelingsohappy);
+        mysong.seekTo(pos);
+        mysong.start();
+        mysong.setVolume(1 - log1, 1 - log1);
+        mysong.setLooping(true);
+
+        if (!start.equals("true")){
+            mysong.stop();
+        }
 
         textView = (TextView) findViewById(R.id.guest_wl);
 
@@ -114,6 +137,9 @@ public class GuestWL extends AppCompatActivity {
                     public void run() {
                         Intent welcome = new Intent(GuestWL.this, GWL1.class);
                         welcome.putExtra("name", getName);
+                        welcome.putExtra("start", start);
+                        welcome.putExtra("volume", volume);
+                        welcome.putExtra("pos", mysong.getCurrentPosition());
                         startActivity(welcome);
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         finish();
@@ -122,12 +148,13 @@ public class GuestWL extends AppCompatActivity {
             }
         });
     }
-
+/*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return super.onCreateOptionsMenu(menu);
     }
+    */
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -138,15 +165,33 @@ public class GuestWL extends AppCompatActivity {
                 public void run() {
                     Intent welcome = new Intent(GuestWL.this, GuestStartGame.class);
                     welcome.putExtra("name", getName);
+                    welcome.putExtra("start", start);
+                    welcome.putExtra("volume", volume);
+                    welcome.putExtra("pos", mysong.getCurrentPosition());
                     startActivity(welcome);
                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                     finish();
                 }
             }, 10);
-        } else if (id == R.id.action_settings){
+        }
+        /*
+        else if (id == R.id.action_settings){
+
 
         }
+        */
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+        mysong.stop();
+    }
+
+    protected void onStop(){
+        super.onStop();
+        mysong.stop();
     }
 }

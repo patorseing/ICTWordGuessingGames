@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -32,10 +33,33 @@ public class RenameDialogsFreg extends DialogFragment {
     private Button update;
     DBHelper helper;
 
+    MediaPlayer mysong;
+    String oldname;
+    String start;
+    int volume;
+    int pos;
+    float log1;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.dialogrename, container,false);
+
+        oldname  = getArguments().getString("oldname").toString();
+        start  = getArguments().getString("start").toString();
+        volume  = getArguments().getInt("volume");
+        pos  = getArguments().getInt("pos");
+
+        mysong = MediaPlayer.create(getContext(), R.raw.feelingsohappy);
+        mysong.seekTo(pos);
+        mysong.start();
+        log1=(float)(Math.log(100-volume)/Math.log(volume));
+        mysong.setVolume(1-log1, 1-log1);
+        mysong.setLooping(true);
+
+        if (start.equals("false")){
+            mysong.stop();
+        }
 
 
         editText = (EditText) view.findViewById(R.id.editText);
@@ -47,6 +71,20 @@ public class RenameDialogsFreg extends DialogFragment {
             @Override
             public void onClick(View view) {
                 getDialog().dismiss();
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        String oldname  = getArguments().getString("oldname").toString();
+                        Intent welcome = new Intent(getActivity(), GuestStartGame.class);
+                        welcome.putExtra("name", oldname);
+                        welcome.putExtra("start", start);
+                        welcome.putExtra("volume", volume);
+                        welcome.putExtra("pos", mysong.getCurrentPosition());
+                        mysong.stop();
+                        startActivity(welcome);
+                    }
+                }, 1);
             }
         });
 
@@ -86,6 +124,10 @@ public class RenameDialogsFreg extends DialogFragment {
                         public void run() {
                             Intent welcome = new Intent(getActivity(), GuestStartGame.class);
                             welcome.putExtra("name", name);
+                            welcome.putExtra("start", start);
+                            welcome.putExtra("volume", volume);
+                            welcome.putExtra("pos", mysong.getCurrentPosition());
+                            mysong.stop();
                             startActivity(welcome);
                         }
                     }, 1);
