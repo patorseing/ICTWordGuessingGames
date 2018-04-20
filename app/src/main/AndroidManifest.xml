@@ -68,8 +68,21 @@
             android:name=".FBlev.FBWL1"
             android:hardwareAccelerated="false"
             android:screenOrientation="portrait" />
-        <activity android:name=".Glev.GSEC1" />
-        <activity android:name=".Glev.GDB1"></activity>
+        <activity
+            android:name=".Glev.GSEC1"
+            android:hardwareAccelerated="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".FBlev.FBSEC1"
+            android:hardwareAccelerated="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Glev.GDB1"
+            android:hardwareAccelerated="false"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".FBlev.FBDB1"
+            android:hardwareAccelerated="false"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
