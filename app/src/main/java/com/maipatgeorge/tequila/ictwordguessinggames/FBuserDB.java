@@ -1,11 +1,26 @@
 package com.maipatgeorge.tequila.ictwordguessinggames;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+
+import com.maipatgeorge.tequila.ictwordguessinggames.DB.DBHelper;
+import com.maipatgeorge.tequila.ictwordguessinggames.FBlev.FBDB1;
+
+import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_F_ID;
+import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_ID;
+import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_L_ID;
+import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_catID;
+import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.TABLE_FbuserPass;
+import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.TABLE_Level;
 
 public class FBuserDB extends AppCompatActivity {
 
@@ -19,23 +34,49 @@ public class FBuserDB extends AppCompatActivity {
     int volume;
     int pos;
 
+    DBHelper helper;
+
+    ImageView correct1;
+    ImageView correct2;
+    ImageView correct3;
+    ImageView correct4;
+    ImageView correct5;
+    ImageView correct6;
+    ImageView correct7;
+    ImageView correct8;
+    ImageView correct9;
+
+    Button lv1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fbuser_db);
 
-        Intent intent = getIntent();
+        intent = getIntent();
 
-        start = intent.getStringExtra("start");
-        volume = intent.getIntExtra("volume", 0);
-        pos = intent.getIntExtra("pos", 0);
+        bd = intent.getExtras();
+        if (savedInstanceState == null){
+            start = intent.getStringExtra("start");
+            volume = intent.getIntExtra("volume", 0);
+            pos = intent.getIntExtra("pos", 0);
+            if (bd != null) {
+                getName = (String) bd.get("name");
+                fbid = (String) bd.get("id");
+            }
+        } else {
+            start = savedInstanceState.getString("start");
+            volume = savedInstanceState.getInt("volume");
+            pos = savedInstanceState.getInt("pos");
+            getName = savedInstanceState.getString("name");
+            fbid = savedInstanceState.getString("id");
+        }
 
         float log1=(float)(Math.log(100-volume)/Math.log(volume));
 
         mysong = MediaPlayer.create(FBuserDB.this, R.raw.feelingsohappy);
-        mysong.seekTo(pos);
         mysong.start();
-        mysong.setVolume(1 - log1, 1 - log1);
+        mysong.setVolume(1-log1, 1-log1);
         mysong.setLooping(true);
 
         if (!start.equals("true")){
@@ -45,6 +86,67 @@ public class FBuserDB extends AppCompatActivity {
         getSupportActionBar().setTitle("ICT game");
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        helper = new DBHelper(this);
+
+        SQLiteDatabase db = helper.getWritableDatabase();
+
+        String sql = "SELECT * FROM "+TABLE_FbuserPass+" WHERE "+KEY_L_ID+" = ( SELECT "+KEY_ID+" FROM "+TABLE_Level+" WHERE "+KEY_catID+" = 3) AND "+KEY_F_ID+" = ?";
+
+        Cursor cursor = db.rawQuery(sql, new String[]{fbid});
+
+        int id[] = new int[cursor.getCount()];
+        int i = 0;
+
+        if (cursor.getCount()>0){
+            cursor.moveToFirst();
+            do {
+                id[i] = cursor.getInt(cursor.getColumnIndex(KEY_L_ID));
+                i++;
+            } while (cursor.moveToNext());
+            cursor.close();
+        }
+
+        correct1 = (ImageView) findViewById(R.id.fbdblev12);
+        correct2 = (ImageView) findViewById(R.id.fbdblev22);
+        correct3 = (ImageView) findViewById(R.id.fbdblev32);
+        correct4 = (ImageView) findViewById(R.id.fbdblev42);
+        correct5 = (ImageView) findViewById(R.id.fbdblev52);
+        correct6 = (ImageView) findViewById(R.id.fbdblev62);
+        correct7 = (ImageView) findViewById(R.id.fbdblev72);
+        correct8 = (ImageView) findViewById(R.id.fbdblev82);
+        correct9 = (ImageView) findViewById(R.id.fbdblev92);
+
+        ImageView[] corArr = new ImageView[]{correct1, correct2, correct3, correct4, correct5, correct6, correct7, correct8, correct9};
+
+        if (id.length > 0){
+            for (i = 0; i<id.length; i++){
+                corArr[id[i]/4].setVisibility(View.VISIBLE);
+            }
+        }
+
+        db.close();
+
+        lv1 = (Button) findViewById(R.id.fbdblev11);
+        lv1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent welcome = new Intent(FBuserDB.this, FBDB1.class);
+                        welcome.putExtra("name", getName);
+                        welcome.putExtra("id", fbid);
+                        welcome.putExtra("start", start);
+                        welcome.putExtra("volume", volume);
+                        welcome.putExtra("pos", mysong.getCurrentPosition());
+                        startActivity(welcome);
+                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                        finish();
+                    }
+                }, 10);
+            }
+        });
     }
 
     @Override
@@ -55,26 +157,21 @@ public class FBuserDB extends AppCompatActivity {
                 @Override
                 public void run() {
                     Intent welcome = new Intent(FBuserDB.this, FBuserStartGame.class);
-                    intent = getIntent();
-                    bd = intent.getExtras();
-                    if(bd != null)
-                    {
-                        getName = (String) bd.get("name");
-                        fbid = (String) bd.get("id");
-                        welcome.putExtra("name", getName);
-                        welcome.putExtra("id", fbid);
-                        welcome.putExtra("start", start);
-                        welcome.putExtra("volume", volume);
-                        welcome.putExtra("pos", mysong.getCurrentPosition());
-                        startActivity(welcome);
-                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                        finish();
-                    }
+                    welcome.putExtra("name", getName);
+                    welcome.putExtra("id", fbid);
+                    welcome.putExtra("start", start);
+                    welcome.putExtra("volume", volume);
+                    welcome.putExtra("pos", mysong.getCurrentPosition());
+                    startActivity(welcome);
+                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                    finish();
                 }
             }, 10);
-        } /*else if (id == R.id.action_settings){
+        } /*
+        else if (id == R.id.action_settings){
 
-        }*/
+        }
+        */
 
         return super.onOptionsItemSelected(item);
     }
@@ -89,5 +186,14 @@ public class FBuserDB extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         mysong.stop();
+    }
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("name", getName);
+        outState.putString("id", fbid);
+        outState.putString("start", start);
+        outState.putInt("volume", volume);
+        outState.putInt("pos", mysong.getCurrentPosition());
     }
 }

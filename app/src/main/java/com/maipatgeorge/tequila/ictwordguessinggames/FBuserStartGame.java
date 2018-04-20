@@ -74,20 +74,28 @@ public class FBuserStartGame extends AppCompatActivity
 
         bd = intent.getExtras();
 
+        if (savedInstanceState == null){
+            start = intent.getStringExtra("start");
+            volume = intent.getIntExtra("volume", 0);
+            pos = intent.getIntExtra("pos", 0);
+            if(bd != null)
+            {
+                getName = (String) bd.get("name");
+                id2 = (String) bd.get("id");
+                name.setText(getName);
 
-        if(bd != null)
-        {
-            getName = (String) bd.get("name");
-            id2 = (String) bd.get("id");
+                //Picasso.with(this).load( "https://graph.facebook.com/"+id2+"/picture?type=small").into(profilePictureView);
+                Picasso.with(this).load("https://graph.facebook.com/"+id2+"/picture?type=large").into(profilePictureView);
+            }
+        } else {
+            start = savedInstanceState.getString("start");
+            volume = savedInstanceState.getInt("volume");
+            pos = savedInstanceState.getInt("pos");
+            getName = savedInstanceState.getString("name");
+            id2 = savedInstanceState.getString("id");
             name.setText(getName);
-
-            //Picasso.with(this).load( "https://graph.facebook.com/"+id2+"/picture?type=small").into(profilePictureView);
             Picasso.with(this).load("https://graph.facebook.com/"+id2+"/picture?type=large").into(profilePictureView);
         }
-
-        start = intent.getStringExtra("start");
-        volume = intent.getIntExtra("volume", 0);
-        pos = intent.getIntExtra("pos", 0);
 
         float log1=(float)(Math.log(100-volume)/Math.log(volume));
 
@@ -297,5 +305,15 @@ public class FBuserStartGame extends AppCompatActivity
     protected void onStop() {
         super.onStop();
         mysong.stop();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("name", getName);
+        outState.putString("id", id2);
+        outState.putString("start", start);
+        outState.putInt("volume", volume);
+        outState.putInt("pos", mysong.getCurrentPosition());
     }
 }

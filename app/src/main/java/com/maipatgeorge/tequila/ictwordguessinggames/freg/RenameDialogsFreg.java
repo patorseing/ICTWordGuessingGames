@@ -45,10 +45,17 @@ public class RenameDialogsFreg extends DialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.dialogrename, container,false);
 
-        oldname  = getArguments().getString("oldname").toString();
-        start  = getArguments().getString("start").toString();
-        volume  = getArguments().getInt("volume");
-        pos  = getArguments().getInt("pos");
+        if (savedInstanceState == null){
+            oldname  = getArguments().getString("oldname").toString();
+            start  = getArguments().getString("start").toString();
+            volume  = getArguments().getInt("volume");
+            pos  = getArguments().getInt("pos");
+        } else {
+            start = savedInstanceState.getString("start");
+            volume = savedInstanceState.getInt("volume");
+            pos = savedInstanceState.getInt("pos");
+            oldname  = savedInstanceState.getString("name");
+        }
 
         mysong = MediaPlayer.create(getContext(), R.raw.feelingsohappy);
         mysong.seekTo(pos);
@@ -141,5 +148,20 @@ public class RenameDialogsFreg extends DialogFragment {
 
 
         return view;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mysong.stop();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("name", oldname);
+        outState.putString("start", start);
+        outState.putInt("volume", volume);
+        outState.putInt("pos", mysong.getCurrentPosition());
     }
 }

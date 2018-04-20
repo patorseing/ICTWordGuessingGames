@@ -38,12 +38,19 @@ public class FBSettingDialogsFreg extends DialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.dialogsetting, container,false);
 
-        name  = getArguments().getString("name").toString();
-        id  = getArguments().getString("id").toString();
-        start  = getArguments().getString("start").toString();
-        start  = getArguments().getString("start").toString();
-        volume  = getArguments().getInt("volume");
-        pos  = getArguments().getInt("pos");
+        if (savedInstanceState == null){
+            name  = getArguments().getString("name").toString();
+            id  = getArguments().getString("id").toString();
+            start  = getArguments().getString("start").toString();
+            volume  = getArguments().getInt("volume");
+            pos  = getArguments().getInt("pos");
+        } else {
+            start = savedInstanceState.getString("start");
+            volume = savedInstanceState.getInt("volume");
+            pos = savedInstanceState.getInt("pos");
+            name  = savedInstanceState.getString("name");
+            id  = savedInstanceState.getString("id");
+        }
 
         mysong = MediaPlayer.create(getContext(), R.raw.feelingsohappy);
         mysong.seekTo(pos);
@@ -137,6 +144,16 @@ public class FBSettingDialogsFreg extends DialogFragment {
     public void onPause() {
         super.onPause();
         mysong.stop();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("name", name);
+        outState.putString("id", id);
+        outState.putString("start", start);
+        outState.putInt("volume", volume);
+        outState.putInt("pos", mysong.getCurrentPosition());
     }
 }
 

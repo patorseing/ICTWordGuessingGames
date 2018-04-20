@@ -55,9 +55,22 @@ public class GuestDB extends AppCompatActivity {
 
         intent = getIntent();
 
-        start = intent.getStringExtra("start");
-        volume = intent.getIntExtra("volume", 0);
-        pos = intent.getIntExtra("pos", 0);
+        bd = intent.getExtras();
+        if (savedInstanceState == null){
+            start = intent.getStringExtra("start");
+            volume = intent.getIntExtra("volume", 0);
+            pos = intent.getIntExtra("pos", 0);
+            bd = intent.getExtras();
+            if(bd != null)
+            {
+                getName = (String) bd.get("name");
+            }
+        } else {
+            start = savedInstanceState.getString("start");
+            volume = savedInstanceState.getInt("volume");
+            pos = savedInstanceState.getInt("pos");
+            getName = savedInstanceState.getString("name");
+        }
 
         float log1=(float)(Math.log(100-volume)/Math.log(volume));
 
@@ -71,23 +84,10 @@ public class GuestDB extends AppCompatActivity {
             mysong.stop();
         }
 
-        bd = intent.getExtras();
-
-        if(bd != null)
-        {
-            getName = (String) bd.get("name");
-        }
 
         getSupportActionBar().setTitle("ICT game");
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        bd = intent.getExtras();
-
-        if(bd != null)
-        {
-            getName = (String) bd.get("name");
-        }
 
         helper = new DBHelper(this);
 
@@ -182,9 +182,17 @@ public class GuestDB extends AppCompatActivity {
         super.onPause();
         mysong.stop();
     }
-
+    @Override
     protected void onStop(){
         super.onStop();
         mysong.stop();
+    }
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("name", getName);
+        outState.putString("start", start);
+        outState.putInt("volume", volume);
+        outState.putInt("pos", mysong.getCurrentPosition());
     }
 }

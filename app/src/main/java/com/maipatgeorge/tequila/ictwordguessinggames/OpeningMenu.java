@@ -63,9 +63,15 @@ public class OpeningMenu extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        start = intent.getStringExtra("start");
-        volume = intent.getIntExtra("volume", 0);
-        pos = intent.getIntExtra("pos", 0);
+        if (savedInstanceState == null){
+            start = intent.getStringExtra("start");
+            volume = intent.getIntExtra("volume", 0);
+            pos = intent.getIntExtra("pos", 0);
+        } else {
+            start = savedInstanceState.getString("start");
+            volume = savedInstanceState.getInt("volume");
+            pos = savedInstanceState.getInt("pos");
+        }
 
         float log1=(float)(Math.log(100-volume)/Math.log(volume));
 
@@ -315,5 +321,13 @@ public class OpeningMenu extends AppCompatActivity {
         if (profile != null){
             LoginManager.getInstance().logOut();
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("start", start);
+        outState.putInt("volume", volume);
+        outState.putInt("pos", mysong.getCurrentPosition());
     }
 }

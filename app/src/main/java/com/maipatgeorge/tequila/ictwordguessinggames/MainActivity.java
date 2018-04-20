@@ -10,6 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity {
 
     MediaPlayer mysong;
+    String start;
+    int volume;
 
     private static int Welcome_Timeout = 4000;
 
@@ -19,7 +21,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final int volume = 100;
+        if(savedInstanceState == null){
+            volume = 100;
+            start = "true";
+        }
 
         float log1=(float)(Math.log(100-volume)/Math.log(volume));
 
@@ -28,9 +33,9 @@ public class MainActivity extends AppCompatActivity {
         mysong.setVolume(1-log1, 1-log1);
         mysong.setLooping(true);
 
-        final String start = "true";
-        final int pos = mysong.getCurrentPosition();
-
+        if (!start.equals("true")) {
+            mysong.stop();
+        }
 
                 new Handler().postDelayed(new Runnable() {
             @Override
@@ -38,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent welcome = new Intent(MainActivity.this, OpeningMenu.class);
                 welcome.putExtra("start", start);
                 welcome.putExtra("volume", volume);
-                welcome.putExtra("pos", pos);
+                welcome.putExtra("pos", mysong.getCurrentPosition());
                 startActivity(welcome);
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 finish();
@@ -57,4 +62,14 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
         mysong.stop();
     }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("start", start);
+        outState.putInt("volume", volume);
+        outState.putInt("pos", mysong.getCurrentPosition());
+    }
+
+
 }

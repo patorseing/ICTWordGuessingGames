@@ -56,14 +56,22 @@ public class FBuserSEC extends AppCompatActivity {
         intent = getIntent();
 
         bd = intent.getExtras();
-        if(bd != null) {
-            getName = (String) bd.get("name");
-            fbid = (String) bd.get("id");
-        }
 
-        start = intent.getStringExtra("start");
-        volume = intent.getIntExtra("volume", 0);
-        pos = intent.getIntExtra("pos", 0);
+        if (savedInstanceState == null){
+            start = intent.getStringExtra("start");
+            volume = intent.getIntExtra("volume", 0);
+            pos = intent.getIntExtra("pos", 0);
+            if (bd != null) {
+                getName = (String) bd.get("name");
+                fbid = (String) bd.get("id");
+            }
+        } else {
+            start = savedInstanceState.getString("start");
+            volume = savedInstanceState.getInt("volume");
+            pos = savedInstanceState.getInt("pos");
+            getName = savedInstanceState.getString("name");
+            fbid = savedInstanceState.getString("id");
+        }
 
         float log1=(float)(Math.log(100-volume)/Math.log(volume));
 
@@ -179,5 +187,14 @@ public class FBuserSEC extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         mysong.stop();
+    }
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("name", getName);
+        outState.putString("id", fbid);
+        outState.putString("start", start);
+        outState.putInt("volume", volume);
+        outState.putInt("pos", mysong.getCurrentPosition());
     }
 }

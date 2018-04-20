@@ -54,12 +54,35 @@ public class GuestStartGame extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_guest_start_game);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        imageView = navigationView.getHeaderView(0).findViewById(R.id.imageView);
+        imageView.setImageResource(R.drawable.profile_image_web);
+        name = navigationView.getHeaderView(0).findViewById(R.id.guestname);
+        helper = new DBHelper(this);
 
         intent = getIntent();
+        bd = intent.getExtras();
 
-        start = intent.getStringExtra("start");
-        volume = intent.getIntExtra("volume", 0);
-        pos = intent.getIntExtra("pos", 0);
+        if (savedInstanceState == null){
+            start = intent.getStringExtra("start");
+            volume = intent.getIntExtra("volume", 0);
+            pos = intent.getIntExtra("pos", 0);
+            bd = intent.getExtras();
+            if(bd != null)
+            {
+                getName = (String) bd.get("name");
+                name.setText(getName);
+            }
+        } else {
+            start = savedInstanceState.getString("start");
+            volume = savedInstanceState.getInt("volume");
+            pos = savedInstanceState.getInt("pos");
+            getName = savedInstanceState.getString("name");
+            name.setText(getName);
+        }
 
         float log1=(float)(Math.log(100-volume)/Math.log(volume));
 
@@ -70,23 +93,6 @@ public class GuestStartGame extends AppCompatActivity
 
         if (!start.equals("true")){
             mysong.stop();
-        }
-
-        setContentView(R.layout.activity_guest_start_game);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        navigationView = (NavigationView) findViewById(R.id.nav_view);
-        imageView = navigationView.getHeaderView(0).findViewById(R.id.imageView);
-        imageView.setImageResource(R.drawable.profile_image_web);
-        name = navigationView.getHeaderView(0).findViewById(R.id.guestname);
-        helper = new DBHelper(this);
-
-        bd = intent.getExtras();
-
-        if(bd != null)
-        {
-            getName = (String) bd.get("name");
-            name.setText(getName);
         }
         /*
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);

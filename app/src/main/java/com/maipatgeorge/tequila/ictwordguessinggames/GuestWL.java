@@ -55,10 +55,23 @@ public class GuestWL extends AppCompatActivity {
         setContentView(R.layout.activity_guest_wl);
 
         intent = getIntent();
+        bd = intent.getExtras();
 
-        start = intent.getStringExtra("start");
-        volume = intent.getIntExtra("volume", 0);
-        pos = intent.getIntExtra("pos", 0);
+        if (savedInstanceState == null){
+            start = intent.getStringExtra("start");
+            volume = intent.getIntExtra("volume", 0);
+            pos = intent.getIntExtra("pos", 0);
+            bd = intent.getExtras();
+            if(bd != null)
+            {
+                getName = (String) bd.get("name");
+            }
+        } else {
+            start = savedInstanceState.getString("start");
+            volume = savedInstanceState.getInt("volume");
+            pos = savedInstanceState.getInt("pos");
+            getName = savedInstanceState.getString("name");
+        }
 
         float log1=(float)(Math.log(100-volume)/Math.log(volume));
 
@@ -70,14 +83,6 @@ public class GuestWL extends AppCompatActivity {
 
         if (!start.equals("true")){
             mysong.stop();
-        }
-
-        intent = getIntent();
-        bd = intent.getExtras();
-
-        if(bd != null)
-        {
-            getName = (String) bd.get("name");
         }
 
         getSupportActionBar().setTitle("ICT game");
@@ -186,8 +191,18 @@ public class GuestWL extends AppCompatActivity {
         mysong.stop();
     }
 
+    @Override
     protected void onStop(){
         super.onStop();
         mysong.stop();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("name", getName);
+        outState.putString("start", start);
+        outState.putInt("volume", volume);
+        outState.putInt("pos", mysong.getCurrentPosition());
     }
 }

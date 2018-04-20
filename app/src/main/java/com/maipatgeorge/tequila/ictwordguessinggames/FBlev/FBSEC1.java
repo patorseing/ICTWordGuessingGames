@@ -100,15 +100,22 @@ public class FBSEC1 extends AppCompatActivity {
         intent = getIntent();
         bd = intent.getExtras();
 
-        if(bd != null) {
-            getName = (String) bd.get("name");
-            fbid = (String) bd.get("id");
+        if (savedInstanceState == null){
+            start = intent.getStringExtra("start");
+            volume = intent.getIntExtra("volume", 0);
+            pos = intent.getIntExtra("pos", 0);
+            if(bd != null)
+            {
+                getName = (String) bd.get("name");
+                fbid = (String) bd.get("id");
+            }
+        } else {
+            start = savedInstanceState.getString("start");
+            volume = savedInstanceState.getInt("volume");
+            pos = savedInstanceState.getInt("pos");
+            getName = savedInstanceState.getString("name");
+            fbid = savedInstanceState.getString("id");
         }
-
-
-        start = intent.getStringExtra("start");
-        volume = intent.getIntExtra("volume", 0);
-        pos = intent.getIntExtra("pos", 0);
 
         float log1=(float)(Math.log(100-volume)/Math.log(volume));
 
@@ -446,6 +453,7 @@ public class FBSEC1 extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                correct.stop();
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -456,7 +464,6 @@ public class FBSEC1 extends AppCompatActivity {
                         welcome.putExtra("volume", volume);
                         welcome.putExtra("pos", mysong.getCurrentPosition());
                         startActivity(welcome);
-                        correct.stop();
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         finish();
                     }
@@ -467,6 +474,7 @@ public class FBSEC1 extends AppCompatActivity {
         stay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                correct.stop();
                 dialog.cancel();
             }
         });
@@ -479,8 +487,18 @@ public class FBSEC1 extends AppCompatActivity {
         mysong.stop();
     }
 
+    @Override
     protected void onStop(){
         super.onStop();
         mysong.stop();
+    }
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("name", getName);
+        outState.putString("id", fbid);
+        outState.putString("start", start);
+        outState.putInt("volume", volume);
+        outState.putInt("pos", mysong.getCurrentPosition());
     }
 }

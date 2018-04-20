@@ -1,4 +1,4 @@
-package com.maipatgeorge.tequila.ictwordguessinggames.Glev;
+package com.maipatgeorge.tequila.ictwordguessinggames.FBlev;
 
 import android.app.Dialog;
 import android.content.ContentValues;
@@ -22,7 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.maipatgeorge.tequila.ictwordguessinggames.DB.DBHelper;
-import com.maipatgeorge.tequila.ictwordguessinggames.GuestSEC;
+import com.maipatgeorge.tequila.ictwordguessinggames.FBuserDB;
 import com.maipatgeorge.tequila.ictwordguessinggames.R;
 import com.maipatgeorge.tequila.ictwordguessinggames.Screenshot;
 import com.maipatgeorge.tequila.ictwordguessinggames.util.GifImageView;
@@ -32,20 +32,21 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_Gname;
+import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_F_ID;
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_ID;
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_LEVEL;
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_L_ID;
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_catID;
-import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.TABLE_GuestPass;
+import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.TABLE_FbuserPass;
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.TABLE_Level;
 
-public class GSEC1 extends AppCompatActivity {
+public class FBDB1 extends AppCompatActivity {
 
     Intent intent;
     Bundle bd;
 
     String getName;
+    String fbid;
 
     DBHelper helper;
 
@@ -56,7 +57,6 @@ public class GSEC1 extends AppCompatActivity {
     TextView s3;
     TextView s4;
     TextView s5;
-    TextView s6;
 
     Button v1;
     Button v2;
@@ -93,7 +93,7 @@ public class GSEC1 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_gsec1);
+        setContentView(R.layout.activity_gdb1);
 
         helper = new DBHelper(this);
 
@@ -104,21 +104,22 @@ public class GSEC1 extends AppCompatActivity {
             start = intent.getStringExtra("start");
             volume = intent.getIntExtra("volume", 0);
             pos = intent.getIntExtra("pos", 0);
-            bd = intent.getExtras();
             if(bd != null)
             {
                 getName = (String) bd.get("name");
+                fbid = (String) bd.get("id");
             }
         } else {
             start = savedInstanceState.getString("start");
             volume = savedInstanceState.getInt("volume");
             pos = savedInstanceState.getInt("pos");
             getName = savedInstanceState.getString("name");
+            fbid = savedInstanceState.getString("id");
         }
 
         float log1=(float)(Math.log(100-volume)/Math.log(volume));
 
-        mysong = MediaPlayer.create(GSEC1.this, R.raw.feelingsohappy);
+        mysong = MediaPlayer.create(FBDB1.this, R.raw.feelingsohappy);
         mysong.seekTo(pos);
         mysong.start();
         mysong.setVolume(1 - log1, 1 - log1);
@@ -132,7 +133,7 @@ public class GSEC1 extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        result = "CIPHER";
+        result = "TABLE";
 
         String levsql = "SELECT  * FROM "+TABLE_Level+" WHERE "+KEY_LEVEL+" = ?";
 
@@ -144,25 +145,24 @@ public class GSEC1 extends AppCompatActivity {
 
         } else {
             ContentValues values = new ContentValues();
-            values.put(KEY_ID, 2);
+            values.put(KEY_ID, 3);
             values.put(KEY_LEVEL, result);
-            values.put(KEY_catID, 2);
+            values.put(KEY_catID, 3);
             db.insertOrThrow(TABLE_Level, null, values);
         }
 
-        s1 = (TextView) findViewById(R.id.gsec1_Space1);
-        s2 = (TextView) findViewById(R.id.gsec1_Space2);
-        s3 = (TextView) findViewById(R.id.gsec1_Space3);
-        s4 = (TextView) findViewById(R.id.gsec1_Space4);
-        s5 = (TextView) findViewById(R.id.gsec1_Space5);
-        s6 = (TextView) findViewById(R.id.gsec1_Space6);
+        s1 = (TextView) findViewById(R.id.gdb1_Space1);
+        s2 = (TextView) findViewById(R.id.gdb1_Space2);
+        s3 = (TextView) findViewById(R.id.gdb1_Space3);
+        s4 = (TextView) findViewById(R.id.gdb1_Space4);
+        s5 = (TextView) findViewById(R.id.gdb1_Space5);
 
-        final TextView[] Space = new TextView[]{s1, s2, s3, s4, s5, s6};
+        final TextView[] Space = new TextView[]{s1, s2, s3, s4, s5};
 
-        String sql = "SELECT  * FROM "+TABLE_GuestPass+" WHERE "+KEY_Gname+" = ? and " + KEY_L_ID +" = 2";
+        String sql = "SELECT  * FROM "+TABLE_FbuserPass+" WHERE "+KEY_F_ID+" = ? and " + KEY_L_ID +" = 3";
         SQLiteDatabase db1 = helper.getReadableDatabase();
 
-        Cursor cursor1 = db1.rawQuery(sql, new String[]{getName});
+        Cursor cursor1 = db1.rawQuery(sql, new String[]{fbid});
 
         if (cursor1.getCount() > 0)
         {
@@ -171,7 +171,7 @@ public class GSEC1 extends AppCompatActivity {
             }
         }
 
-        v1 = (Button) findViewById(R.id.gsec1_char1);
+        v1 = (Button) findViewById(R.id.gdb1_char1);
         v1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -185,7 +185,7 @@ public class GSEC1 extends AppCompatActivity {
             }
         });
 
-        v2 = (Button) findViewById(R.id.gsec1_char2);
+        v2 = (Button) findViewById(R.id.gdb1_char2);
         v2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -199,7 +199,7 @@ public class GSEC1 extends AppCompatActivity {
             }
         });
 
-        v3 = (Button) findViewById(R.id.gsec1_char3);
+        v3 = (Button) findViewById(R.id.gdb1_char3);
         v3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -213,7 +213,7 @@ public class GSEC1 extends AppCompatActivity {
             }
         });
 
-        v4 = (Button) findViewById(R.id.gsec1_char4);
+        v4 = (Button) findViewById(R.id.gdb1_char4);
         v4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -227,7 +227,7 @@ public class GSEC1 extends AppCompatActivity {
             }
         });
 
-        v5 = (Button) findViewById(R.id.gsec1_char5);
+        v5 = (Button) findViewById(R.id.gdb1_char5);
         v5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -241,7 +241,7 @@ public class GSEC1 extends AppCompatActivity {
             }
         });
 
-        v6 = (Button) findViewById(R.id.gsec1_char6);
+        v6 = (Button) findViewById(R.id.gdb1_char6);
         v6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -255,7 +255,7 @@ public class GSEC1 extends AppCompatActivity {
             }
         });
 
-        v7 = (Button) findViewById(R.id.gsec1_char7);
+        v7 = (Button) findViewById(R.id.gdb1_char7);
         v7.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -269,7 +269,7 @@ public class GSEC1 extends AppCompatActivity {
             }
         });
 
-        v8 = (Button) findViewById(R.id.gsec1_char8);
+        v8 = (Button) findViewById(R.id.gdb1_char8);
         v8.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -283,7 +283,7 @@ public class GSEC1 extends AppCompatActivity {
             }
         });
 
-        v9 = (Button) findViewById(R.id.gsec1_char9);
+        v9 = (Button) findViewById(R.id.gdb1_char9);
         v9.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -299,7 +299,7 @@ public class GSEC1 extends AppCompatActivity {
 
         final Button[] type = new Button[]{v1, v2, v3, v4, v5, v6, v7, v8, v9};
 
-        delete = (Button) findViewById(R.id.gsec1_delete);
+        delete = (Button) findViewById(R.id.gdb1_delete);
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -318,7 +318,7 @@ public class GSEC1 extends AppCompatActivity {
             }
         });
 
-        enter = (Button) findViewById(R.id.gsec1_enter);
+        enter = (Button) findViewById(R.id.gdb1_enter);
         enter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -330,10 +330,10 @@ public class GSEC1 extends AppCompatActivity {
                     count++;
                 }
                 if (count == Space.length){
-                    String sql = "SELECT  * FROM "+TABLE_GuestPass+" WHERE "+KEY_Gname+" = ? and " + KEY_L_ID +" = 2";
+                    String sql = "SELECT  * FROM "+TABLE_FbuserPass+" WHERE "+KEY_F_ID+" = ? and " + KEY_L_ID +" = 3";
                     SQLiteDatabase db1 = helper.getReadableDatabase();
 
-                    Cursor cursor1 = db1.rawQuery(sql, new String[]{getName});
+                    Cursor cursor1 = db1.rawQuery(sql, new String[]{fbid});
 
                     String id[] = new String[cursor1.getCount()];
                     if (cursor1.getCount() > 0) {
@@ -341,9 +341,9 @@ public class GSEC1 extends AppCompatActivity {
                     } else {
                         SQLiteDatabase db = helper.getWritableDatabase();
                         ContentValues values = new ContentValues();
-                        values.put(KEY_Gname, getName);
-                        values.put(KEY_L_ID, 2);
-                        db.insertOrThrow(TABLE_GuestPass, null, values);
+                        values.put(KEY_F_ID, fbid);
+                        values.put(KEY_L_ID, 3);
+                        db.insertOrThrow(TABLE_FbuserPass, null, values);
                         db.close();
                         db1.close();
                     }
@@ -365,19 +365,6 @@ public class GSEC1 extends AppCompatActivity {
             }
         });
 
-        imageView = (ImageView) findViewById(R.id.GSEC1);
-
-        share = (ImageButton) findViewById(R.id.shareSEC1);
-
-        share.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Bitmap b = Screenshot.takescreenshotOfRootview(imageView);
-                startShare(b);
-                //imageView.setImageBitmap(b);
-                //main.setBackgroundColor(Color.parseColor("#999999 "));
-            }
-        });
     }
 
     @Override
@@ -387,8 +374,9 @@ public class GSEC1 extends AppCompatActivity {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    Intent welcome = new Intent(GSEC1.this, GuestSEC.class);
+                    Intent welcome = new Intent(FBDB1.this, FBuserDB.class);
                     welcome.putExtra("name", getName);
+                    welcome.putExtra("id", fbid);
                     welcome.putExtra("start", start);
                     welcome.putExtra("volume", volume);
                     welcome.putExtra("pos", mysong.getCurrentPosition());
@@ -420,19 +408,19 @@ public class GSEC1 extends AppCompatActivity {
     }
 
     public void myDialogs(){
-        dialog = new Dialog(GSEC1.this);
+        dialog = new Dialog(FBDB1.this);
         dialog.setContentView(R.layout.dialogscongres);
 
-        linearLayout = new LinearLayout(GSEC1.this);
+        linearLayout = new LinearLayout(FBDB1.this);
         linearLayout = (LinearLayout) dialog.findViewById(R.id.l1);
         linearLayout.setEnabled(true);
 
-        congrats = new GifImageView(GSEC1.this);
+        congrats = new GifImageView(FBDB1.this);
         congrats = (GifImageView) dialog.findViewById(R.id.congratss);
         congrats.setGifImageResource(R.drawable.congratulation);
         congrats.setEnabled(true);
 
-        linearLayout = new LinearLayout(GSEC1.this);
+        linearLayout = new LinearLayout(FBDB1.this);
         linearLayout2 = (LinearLayout) dialog.findViewById(R.id.l2);
         linearLayout.setEnabled(true);
 
@@ -455,8 +443,9 @@ public class GSEC1 extends AppCompatActivity {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        Intent welcome = new Intent(GSEC1.this, GuestSEC.class);
+                        Intent welcome = new Intent(FBDB1.this, FBuserDB.class);
                         welcome.putExtra("name", getName);
+                        welcome.putExtra("id", fbid);
                         welcome.putExtra("start", start);
                         welcome.putExtra("volume", volume);
                         welcome.putExtra("pos", mysong.getCurrentPosition());
@@ -475,6 +464,21 @@ public class GSEC1 extends AppCompatActivity {
                 dialog.cancel();
             }
         });
+
+        imageView = (ImageView) findViewById(R.id.GDB1);
+
+        share = (ImageButton) findViewById(R.id.shareDB1);
+
+        share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bitmap b = Screenshot.takescreenshotOfRootview(imageView);
+                startShare(b);
+                //imageView.setImageBitmap(b);
+                //main.setBackgroundColor(Color.parseColor("#999999 "));
+            }
+        });
+
     }
 
 
@@ -494,6 +498,7 @@ public class GSEC1 extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString("name", getName);
+        outState.putString("id", fbid);
         outState.putString("start", start);
         outState.putInt("volume", volume);
         outState.putInt("pos", mysong.getCurrentPosition());
