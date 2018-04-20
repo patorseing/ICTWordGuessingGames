@@ -114,7 +114,7 @@ public class FBuserWL extends AppCompatActivity {
 
         if (id.length > 0){
             for (i = 0; i<id.length; i++){
-                corArr[id[i]/3].setVisibility(View.VISIBLE);
+                corArr[id[i]/4].setVisibility(View.VISIBLE);
             }
         }
 

@@ -99,10 +99,12 @@ public class RenameDialogsFreg extends DialogFragment {
                     SQLiteDatabase db = helper.getWritableDatabase();
 
                     ContentValues cv = new ContentValues();
+                    ContentValues cv1 = new ContentValues();
 
                     String oldname  = getArguments().getString("oldname").toString();
 
                     cv.put(KEY_NAME,name);
+                    cv1.put(KEY_Gname,name);
 
                     db.update(TABLE_Guest, cv, KEY_NAME +"= ?", new String[]{oldname});
 
@@ -110,7 +112,7 @@ public class RenameDialogsFreg extends DialogFragment {
 
                     Cursor cursor = db.rawQuery(sql, new String[]{oldname});
                     if (cursor.getCount() > 0){
-                        db.update(TABLE_GuestPass, cv, KEY_Gname +"= ?", new String[]{oldname});
+                        db.update(TABLE_GuestPass, cv1, KEY_Gname +"= ?", new String[]{oldname});
                     }
 
                     /*

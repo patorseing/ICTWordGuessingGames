@@ -27,7 +27,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String LOG = "DBHelper";
 
     // Database Version
-    private static final int DB_VERSION = 20;
+    private static final int DB_VERSION = 23;
 
     // Database Name
     private static final String DB_NAME = "ICT_game.db";
