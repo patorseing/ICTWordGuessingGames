@@ -38,7 +38,7 @@ public class RenameDialogsFreg extends DialogFragment {
     String start;
     int volume;
     int pos;
-    float log1;
+    float reduce;
 
     @Nullable
     @Override
@@ -60,8 +60,8 @@ public class RenameDialogsFreg extends DialogFragment {
         mysong = MediaPlayer.create(getContext(), R.raw.feelingsohappy);
         mysong.seekTo(pos);
         mysong.start();
-        log1=(float)(Math.log(100-volume)/Math.log(volume));
-        mysong.setVolume(1-log1, 1-log1);
+        reduce=(float)(100 - volume)/100;
+        mysong.setVolume(1-reduce, 1-reduce);
         mysong.setLooping(true);
 
         if (start.equals("false")){

@@ -31,7 +31,7 @@ public class FBSettingDialogsFreg extends DialogFragment {
     String start;
     int volume;
     int pos;
-    float log1;
+    float reduce;
 
     @Nullable
     @Override
@@ -55,8 +55,8 @@ public class FBSettingDialogsFreg extends DialogFragment {
         mysong = MediaPlayer.create(getContext(), R.raw.feelingsohappy);
         mysong.seekTo(pos);
         mysong.start();
-        log1=(float)(Math.log(100-volume)/Math.log(volume));
-        mysong.setVolume(1-log1, 1-log1);
+        reduce=(float)(100 - volume)/100;
+        mysong.setVolume(1-reduce, 1-reduce);
         mysong.setLooping(true);
 
         aSwitch = (Switch) view.findViewById(R.id.switch1);
@@ -77,7 +77,7 @@ public class FBSettingDialogsFreg extends DialogFragment {
                 if (b) {
                     mysong = MediaPlayer.create(getContext(), R.raw.feelingsohappy);
                     mysong.start();
-                    mysong.setVolume(1-log1, 1-log1);
+                    mysong.setVolume(1-reduce, 1-reduce);
                     start = "true";
                 } else {
                     //Toast.makeText(getContext(),"off", Toast.LENGTH_SHORT).show();
@@ -95,11 +95,8 @@ public class FBSettingDialogsFreg extends DialogFragment {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 volume = i;
-                if (volume == 0){
-                    volume = 1;
-                }
-                log1 = (float)(Math.log(100-volume)/Math.log(volume));
-                mysong.setVolume(1-log1, 1-log1);
+                reduce=(float)(100 - volume)/100;
+                mysong.setVolume(1-reduce, 1-reduce);
             }
 
             @Override

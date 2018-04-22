@@ -33,6 +33,7 @@ public class FBuserSEC extends AppCompatActivity {
     String start;
     int volume;
     int pos;
+    float reduce;
 
     DBHelper helper;
 
@@ -73,11 +74,11 @@ public class FBuserSEC extends AppCompatActivity {
             fbid = savedInstanceState.getString("id");
         }
 
-        float log1=(float)(Math.log(100-volume)/Math.log(volume));
+        reduce=(float)(100 - volume)/100;
 
         mysong = MediaPlayer.create(FBuserSEC.this, R.raw.feelingsohappy);
         mysong.start();
-        mysong.setVolume(1-log1, 1-log1);
+        mysong.setVolume(1-reduce, 1-reduce);
         mysong.setLooping(true);
 
         if (!start.equals("true")){

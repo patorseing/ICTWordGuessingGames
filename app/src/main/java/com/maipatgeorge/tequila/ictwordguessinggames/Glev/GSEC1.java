@@ -89,6 +89,7 @@ public class GSEC1 extends AppCompatActivity {
     String start;
     int volume;
     int pos;
+    float reduce;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,12 +117,12 @@ public class GSEC1 extends AppCompatActivity {
             getName = savedInstanceState.getString("name");
         }
 
-        float log1=(float)(Math.log(100-volume)/Math.log(volume));
+        reduce=(float)(100 - volume)/100;
 
         mysong = MediaPlayer.create(GSEC1.this, R.raw.feelingsohappy);
         mysong.seekTo(pos);
         mysong.start();
-        mysong.setVolume(1 - log1, 1 - log1);
+        mysong.setVolume(1 - reduce, 1 - reduce);
         mysong.setLooping(true);
 
         if (!start.equals("true")){

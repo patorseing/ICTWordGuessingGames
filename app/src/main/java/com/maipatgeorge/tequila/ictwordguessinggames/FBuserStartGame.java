@@ -55,6 +55,7 @@ public class FBuserStartGame extends AppCompatActivity
     String start;
     int volume;
     int pos;
+    float reduce;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,11 +98,11 @@ public class FBuserStartGame extends AppCompatActivity
             Picasso.with(this).load("https://graph.facebook.com/"+id2+"/picture?type=large").into(profilePictureView);
         }
 
-        float log1=(float)(Math.log(100-volume)/Math.log(volume));
+        reduce=(float)(100 - volume)/100;
 
         mysong = MediaPlayer.create(FBuserStartGame.this, R.raw.feelingsohappy);
         mysong.start();
-        mysong.setVolume(1-log1, 1-log1);
+        mysong.setVolume(1-reduce, 1-reduce);
         mysong.setLooping(true);
 
         if (!start.equals("true")){

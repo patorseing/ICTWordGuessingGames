@@ -73,12 +73,12 @@ public class OpeningMenu extends AppCompatActivity {
             pos = savedInstanceState.getInt("pos");
         }
 
-        float log1=(float)(Math.log(100-volume)/Math.log(volume));
+        float reduce=(float)(100 - volume)/100;
 
         mysong = MediaPlayer.create(OpeningMenu.this, R.raw.feelingsohappy);
         mysong.seekTo(pos);
         mysong.start();
-        mysong.setVolume(1 - log1, 1 - log1);
+        mysong.setVolume(1 - reduce, 1 - reduce);
         mysong.setLooping(true);
 
         if (!start.equals("true")){

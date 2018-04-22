@@ -12,6 +12,7 @@ public class MainActivity extends AppCompatActivity {
     MediaPlayer mysong;
     String start;
     int volume;
+    float reduce;
 
     private static int Welcome_Timeout = 4000;
 
@@ -26,11 +27,11 @@ public class MainActivity extends AppCompatActivity {
             start = "true";
         }
 
-        float log1=(float)(Math.log(100-volume)/Math.log(volume));
+        reduce=(float)(100 - volume)/100;
 
         mysong = MediaPlayer.create(MainActivity.this, R.raw.feelingsohappy);
         mysong.start();
-        mysong.setVolume(1-log1, 1-log1);
+        mysong.setVolume(1-reduce, 1-reduce);
         mysong.setLooping(true);
 
         if (!start.equals("true")) {
