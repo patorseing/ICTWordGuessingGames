@@ -23,7 +23,7 @@ import android.widget.Toast;
 import com.maipatgeorge.tequila.ictwordguessinggames.DB.DBHelper;
 import com.maipatgeorge.tequila.ictwordguessinggames.GuestWL;
 import com.maipatgeorge.tequila.ictwordguessinggames.R;
-import com.maipatgeorge.tequila.ictwordguessinggames.Screenshot;
+import com.maipatgeorge.tequila.ictwordguessinggames.util.Screenshot;
 import com.maipatgeorge.tequila.ictwordguessinggames.util.GifImageView;
 
 import java.io.File;
@@ -37,8 +37,16 @@ import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_catI
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.TABLE_GuestPass;
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.TABLE_Level;
 
+//*******************************************************************
+// GSEC1
+//
+// this class is first level of wireless in the guest user side.
+// the model of every level
+//*******************************************************************
+
 public class GWL1 extends AppCompatActivity {
 
+    //declare variable
     Intent intent;
     Bundle bd;
 
@@ -48,6 +56,7 @@ public class GWL1 extends AppCompatActivity {
 
     String result;
 
+    //the space of missing character of guessing word
     TextView s1;
     TextView s2;
     TextView s3;
@@ -56,6 +65,7 @@ public class GWL1 extends AppCompatActivity {
     TextView s6;
     TextView s7;
 
+    //the simulating keyboard
     Button v1;
     Button v2;
     Button v3;
@@ -101,6 +111,7 @@ public class GWL1 extends AppCompatActivity {
         intent = getIntent();
         bd = intent.getExtras();
 
+        //get the value from previous activity
         if (savedInstanceState == null){
             start = intent.getStringExtra("start");
             volume = intent.getIntExtra("volume", 0);
@@ -119,6 +130,7 @@ public class GWL1 extends AppCompatActivity {
 
         reduce=(float)(100 - volume)/100;
 
+        //setting the background music
         mysong = MediaPlayer.create(GWL1.this, R.raw.feelingsohappy);
         mysong.seekTo(pos);
         mysong.start();
@@ -161,6 +173,7 @@ public class GWL1 extends AppCompatActivity {
 
         final TextView[] Space = new TextView[]{s1, s2, s3, s4, s5, s6, s7};
 
+        //check that the user pass this level or not
         String sql = "SELECT  * FROM "+TABLE_GuestPass+" WHERE "+KEY_Gname+" = ? and " + KEY_L_ID +" = 1";
         SQLiteDatabase db1 = helper.getReadableDatabase();
 
@@ -169,17 +182,21 @@ public class GWL1 extends AppCompatActivity {
         if (cursor1.getCount() > 0)
         {
             for (int i = 0; i<Space.length; i++){
+                //if the user pass the level can show result when the user access
                 Space[i].setText(String.valueOf(result.charAt(i)));
             }
         }
 
+        //setting function of the stimulating keyboard
         v1 = (Button) findViewById(R.id.gwl1_char1);
         v1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //find the space to put the char in the space
                 for(int i = 0; i< Space.length; i++){
                     if (Space[i].getText().equals("____")){
                         Space[i].setText(v1.getText());
+                        //remove the text in the button
                         v1.setText("____");
                         break;
                     }
@@ -301,6 +318,7 @@ public class GWL1 extends AppCompatActivity {
 
         final Button[] type = new Button[]{v1, v2, v3, v4, v5, v6, v7, v8, v9};
 
+        //the function of delete key
         delete = (Button) findViewById(R.id.gwl1_delete);
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -320,6 +338,7 @@ public class GWL1 extends AppCompatActivity {
             }
         });
 
+        //when user submit the answer, this how apps check ans
         enter = (Button) findViewById(R.id.gwl1_enter);
         enter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -341,6 +360,7 @@ public class GWL1 extends AppCompatActivity {
                     if (cursor1.getCount() > 0) {
 
                     } else {
+                        //insert the name of user with level number when they correct the level
                         SQLiteDatabase db = helper.getWritableDatabase();
                         ContentValues values = new ContentValues();
                         values.put(KEY_Gname, getName);
@@ -353,6 +373,7 @@ public class GWL1 extends AppCompatActivity {
                     myDialogs();
 
                 } else {
+                    // if the answer is not correct this level will be reset
                     for (int i = 0; i < Space.length; i++){
                         for (int j = 0; j < type.length; j++){
                             if (type[j].getText().equals("____")){
@@ -374,14 +395,21 @@ public class GWL1 extends AppCompatActivity {
         share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //call Screenshot to take the screenshot
                 Bitmap b = Screenshot.takescreenshotOfRootview(imageView);
                 try {
+                    //declare file that of image
                     File file = new File(GWL1.this.getExternalCacheDir(),"GWL1share.png");
                     FileOutputStream fOut = new FileOutputStream(file);
+                    // put the Screenshot in file
                     b.compress(Bitmap.CompressFormat.PNG, 100, fOut);
+                    // forces any buffered output bytes
                     fOut.flush();
+                    // close file
                     fOut.close();
+                    // set permission
                     file.setReadable(true, false);
+                    //send intent out of apps
                     final Intent intent = new Intent(android.content.Intent.ACTION_SEND);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
@@ -416,6 +444,7 @@ public class GWL1 extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    // set the dialogs to congrats user who pass
     public void myDialogs(){
         dialog = new Dialog(GWL1.this);
         dialog.setContentView(R.layout.dialogscongres);

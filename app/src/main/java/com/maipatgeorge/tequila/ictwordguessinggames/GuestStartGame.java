@@ -31,6 +31,14 @@ import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.TABLE_Ca
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.TABLE_GuestPass;
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.cat_name;
 
+//*******************************************************************
+// FBuserStartGame
+//
+// After user check in, this class like controlling section
+// for user csn choose the part that they want.
+//
+//*******************************************************************
+
 public class GuestStartGame extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -54,7 +62,9 @@ public class GuestStartGame extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //this activity uses navigation drawer activity
         super.onCreate(savedInstanceState);
+        //set up the navigation
         setContentView(R.layout.activity_guest_start_game);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -132,6 +142,7 @@ public class GuestStartGame extends AppCompatActivity
             }
         }
 
+        //the button for wireless button
         wl_guest = (Button) findViewById(R.id.guest_wl);
 
         wl_guest.setOnClickListener(new View.OnClickListener() {
@@ -153,6 +164,7 @@ public class GuestStartGame extends AppCompatActivity
             }
         });
 
+        //the button for security button
         se_guest = (Button) findViewById(R.id.guest_sec);
 
         se_guest.setOnClickListener(new View.OnClickListener() {
@@ -174,6 +186,7 @@ public class GuestStartGame extends AppCompatActivity
             }
         });
 
+        //the button for database button
         db_guest = (Button) findViewById(R.id.guest_db);
 
         db_guest.setOnClickListener(new View.OnClickListener() {
@@ -196,6 +209,7 @@ public class GuestStartGame extends AppCompatActivity
         });
     }
 
+    //the movement when nav start or back
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -206,6 +220,7 @@ public class GuestStartGame extends AppCompatActivity
         }
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -213,24 +228,24 @@ public class GuestStartGame extends AppCompatActivity
         return true;
     }
 
-
+    //this apps did not use this part. this position is up and right
+    /*
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        /*
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
-        */
+
         return super.onOptionsItemSelected(item);
     }
+    */
 
-
+    //the menu in nav
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -270,6 +285,7 @@ public class GuestStartGame extends AppCompatActivity
         return true;
     }
 
+    //in navigation drawer activity must use dialogs Fragment
     private void displaySelectedScreen(int id){
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
 
@@ -309,6 +325,15 @@ public class GuestStartGame extends AppCompatActivity
     protected void onResume() {
         super.onResume();
         mysong.start();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("name", getName);
+        outState.putString("start", start);
+        outState.putInt("volume", volume);
+        outState.putInt("pos", mysong.getCurrentPosition());
     }
 }
 

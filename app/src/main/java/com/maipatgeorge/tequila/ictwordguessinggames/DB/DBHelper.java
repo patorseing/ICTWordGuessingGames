@@ -21,6 +21,12 @@ import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.TABLE_Gu
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.TABLE_GuestPass;
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.TABLE_Level;
 
+//*******************************************************************
+// DBHelper
+//
+// this class is for control database of this apps
+//*******************************************************************
+
 public class DBHelper extends SQLiteOpenHelper {
 
     // Logcat tag
@@ -65,6 +71,8 @@ public class DBHelper extends SQLiteOpenHelper {
         super(context, DB_NAME, null, DB_VERSION);
     }
 
+
+    //when starting new version must creating new table
     @Override
     public void onCreate(SQLiteDatabase db) {
         // creating required tables
@@ -76,6 +84,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_FbuserPass);
     }
 
+    //when starting new version must drop the table first
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // on upgrade drop older tables

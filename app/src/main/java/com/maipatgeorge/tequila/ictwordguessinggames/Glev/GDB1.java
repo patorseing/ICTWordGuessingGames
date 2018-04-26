@@ -23,7 +23,7 @@ import android.widget.Toast;
 import com.maipatgeorge.tequila.ictwordguessinggames.DB.DBHelper;
 import com.maipatgeorge.tequila.ictwordguessinggames.GuestDB;
 import com.maipatgeorge.tequila.ictwordguessinggames.R;
-import com.maipatgeorge.tequila.ictwordguessinggames.Screenshot;
+import com.maipatgeorge.tequila.ictwordguessinggames.util.Screenshot;
 import com.maipatgeorge.tequila.ictwordguessinggames.util.GifImageView;
 
 import java.io.File;
@@ -36,6 +36,13 @@ import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_L_ID
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_catID;
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.TABLE_GuestPass;
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.TABLE_Level;
+
+//*******************************************************************
+// GDB1
+//
+// this class is first level of database in the guest user side.
+// the model is from GWL1.java
+//*******************************************************************
 
 public class GDB1 extends AppCompatActivity {
 

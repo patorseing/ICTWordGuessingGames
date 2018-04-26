@@ -19,6 +19,13 @@ import android.widget.Toast;
 import com.maipatgeorge.tequila.ictwordguessinggames.FBuserStartGame;
 import com.maipatgeorge.tequila.ictwordguessinggames.R;
 
+//*******************************************************************
+// FBSettingDialogsFreg
+//
+// this class is the dialog fragment that for setting sound in facebook
+// user side. the model is from SettingDialogsFreg.java
+//*******************************************************************
+
 public class FBSettingDialogsFreg extends DialogFragment {
 
     Switch aSwitch;

@@ -22,6 +22,14 @@ import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_catI
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.TABLE_GuestPass;
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.TABLE_Level;
 
+//*******************************************************************
+// GuestWL
+//
+// this class is for gathering all level in the future that all
+// in wireless category, it take in guest user part.
+//
+//*******************************************************************
+
 public class GuestWL extends AppCompatActivity {
 
     Intent intent;
@@ -86,6 +94,7 @@ public class GuestWL extends AppCompatActivity {
             mysong.stop();
         }
 
+        //set the bar: title and back button
         getSupportActionBar().setTitle("ICT game");
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -124,7 +133,8 @@ public class GuestWL extends AppCompatActivity {
 
         if (id.length > 0){
             for (i = 0; i<id.length; i++){
-                corArr[id[i]/3].setVisibility(View.VISIBLE);
+                // display correct when the user pass any level of the category
+                corArr[id[i]/4].setVisibility(View.VISIBLE);
             }
         }
 
@@ -158,6 +168,7 @@ public class GuestWL extends AppCompatActivity {
     }
     */
 
+    //this is the function of back button
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();

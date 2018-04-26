@@ -23,7 +23,7 @@ import android.widget.Toast;
 import com.maipatgeorge.tequila.ictwordguessinggames.DB.DBHelper;
 import com.maipatgeorge.tequila.ictwordguessinggames.FBuserDB;
 import com.maipatgeorge.tequila.ictwordguessinggames.R;
-import com.maipatgeorge.tequila.ictwordguessinggames.Screenshot;
+import com.maipatgeorge.tequila.ictwordguessinggames.util.Screenshot;
 import com.maipatgeorge.tequila.ictwordguessinggames.util.GifImageView;
 
 import java.io.File;
@@ -36,6 +36,13 @@ import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_L_ID
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_catID;
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.TABLE_FbuserPass;
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.TABLE_Level;
+
+//*******************************************************************
+// FBDB1
+//
+// this class is first level of database in the facebook user side.
+// the model is from GWL1.java
+//*******************************************************************
 
 public class FBDB1 extends AppCompatActivity {
 
@@ -91,6 +98,7 @@ public class FBDB1 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //the layout is same as guest side
         setContentView(R.layout.activity_gdb1);
 
         helper = new DBHelper(this);

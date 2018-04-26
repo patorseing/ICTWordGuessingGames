@@ -19,6 +19,13 @@ import android.widget.Toast;
 import com.maipatgeorge.tequila.ictwordguessinggames.GuestStartGame;
 import com.maipatgeorge.tequila.ictwordguessinggames.R;
 
+//*******************************************************************
+// FBSettingDialogsFreg
+//
+// this class is the dialog fragment that for setting sound in guest
+// user side.
+//*******************************************************************
+
 public class SettingDialogsFreg extends DialogFragment {
 
     Switch aSwitch;
@@ -49,7 +56,6 @@ public class SettingDialogsFreg extends DialogFragment {
             oldname  = savedInstanceState.getString("name");
         }
 
-
         mysong = MediaPlayer.create(getContext(), R.raw.feelingsohappy);
         mysong.seekTo(pos);
         mysong.start();
@@ -69,6 +75,7 @@ public class SettingDialogsFreg extends DialogFragment {
             start = "false";
         }
 
+        //turn on/ turn off sound
         aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -89,6 +96,7 @@ public class SettingDialogsFreg extends DialogFragment {
 
         seekBar.setProgress(volume);
 
+        //setting volume (the setting volume is float)
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {

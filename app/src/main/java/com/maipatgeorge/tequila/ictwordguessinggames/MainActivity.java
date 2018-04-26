@@ -6,6 +6,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 
+//*******************************************************************
+// MainActivity
+//
+// start activity shows logo
+// and fade to next activity
+//*******************************************************************
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
             start = "true";
         }
 
+        //initial the background sound
         reduce=(float)(100 - volume)/100;
 
         mysong = MediaPlayer.create(MainActivity.this, R.raw.feelingsohappy);
@@ -37,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         if (!start.equals("true")) {
             mysong.stop();
         }
-
+        // fade part
                 new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

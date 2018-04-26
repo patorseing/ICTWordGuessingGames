@@ -23,7 +23,7 @@ import android.widget.Toast;
 import com.maipatgeorge.tequila.ictwordguessinggames.DB.DBHelper;
 import com.maipatgeorge.tequila.ictwordguessinggames.FBuserSEC;
 import com.maipatgeorge.tequila.ictwordguessinggames.R;
-import com.maipatgeorge.tequila.ictwordguessinggames.Screenshot;
+import com.maipatgeorge.tequila.ictwordguessinggames.util.Screenshot;
 import com.maipatgeorge.tequila.ictwordguessinggames.util.GifImageView;
 
 import java.io.File;
@@ -36,6 +36,13 @@ import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_L_ID
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_catID;
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.TABLE_FbuserPass;
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.TABLE_Level;
+
+//*******************************************************************
+// FBSEC1
+//
+// this class is first level of security in the facebook user side.
+// the model is from GWL1.java
+//*******************************************************************
 
 public class FBSEC1 extends AppCompatActivity {
     Intent intent;
@@ -91,6 +98,7 @@ public class FBSEC1 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //the layout is same as guest side
         setContentView(R.layout.activity_gsec1);
 
         helper = new DBHelper(this);

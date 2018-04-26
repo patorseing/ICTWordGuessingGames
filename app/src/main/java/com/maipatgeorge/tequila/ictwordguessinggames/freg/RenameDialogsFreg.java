@@ -26,6 +26,12 @@ import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_NAME
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.TABLE_Guest;
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.TABLE_GuestPass;
 
+//*******************************************************************
+// RenameDialogsFreg
+//
+// this class is the dialog fragment that for rename name of guest.
+//*******************************************************************
+
 public class RenameDialogsFreg extends DialogFragment {
 
     private EditText editText;
@@ -119,6 +125,7 @@ public class RenameDialogsFreg extends DialogFragment {
 
                     Cursor cursor = db.rawQuery(sql, new String[]{oldname});
                     if (cursor.getCount() > 0){
+                        //get update game in database
                         db.update(TABLE_GuestPass, cv1, KEY_Gname +"= ?", new String[]{oldname});
                     }
 

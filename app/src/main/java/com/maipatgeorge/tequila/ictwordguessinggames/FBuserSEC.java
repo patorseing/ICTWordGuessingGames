@@ -22,6 +22,14 @@ import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_catI
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.TABLE_FbuserPass;
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.TABLE_Level;
 
+//*******************************************************************
+// FBuserSEC
+//
+// this class is for gathering all level in the future that all
+// in security category, it take in facebook user part.
+// For the model of this class is GuestWL.java
+//*******************************************************************
+
 public class FBuserSEC extends AppCompatActivity {
 
     Intent intent;

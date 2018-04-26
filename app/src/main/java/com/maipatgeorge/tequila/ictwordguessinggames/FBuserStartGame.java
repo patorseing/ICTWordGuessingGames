@@ -31,6 +31,15 @@ import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.TABLE_Ca
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.TABLE_FbuserPass;
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.cat_name;
 
+//*******************************************************************
+// FBuserStartGame
+//
+// After user login facebook, this class like controlling section
+// for user csn choose the part that they want. The model of this
+// class is GuestStartGame.java5
+//
+//*******************************************************************
+
 public class FBuserStartGame extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 

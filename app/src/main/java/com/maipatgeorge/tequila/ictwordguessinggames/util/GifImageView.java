@@ -12,6 +12,9 @@ import android.view.View;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
+//*******************************************************************
+// GifImageView is the open source in github
+//*******************************************************************
 
 public class GifImageView extends View {
 
