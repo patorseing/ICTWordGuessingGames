@@ -9,7 +9,6 @@ import android.graphics.Bitmap;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
@@ -27,10 +26,8 @@ import com.maipatgeorge.tequila.ictwordguessinggames.R;
 import com.maipatgeorge.tequila.ictwordguessinggames.Screenshot;
 import com.maipatgeorge.tequila.ictwordguessinggames.util.GifImageView;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_F_ID;
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_ID;
@@ -379,28 +376,23 @@ public class FBWL1 extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Bitmap b = Screenshot.takescreenshotOfRootview(imageView);
-                startShare(b);
-                //imageView.setImageBitmap(b);
-                //main.setBackgroundColor(Color.parseColor("#999999 "));
+                try {
+                    File file = new File(FBWL1.this.getExternalCacheDir(),"GWL1share.png");
+                    FileOutputStream fOut = new FileOutputStream(file);
+                    b.compress(Bitmap.CompressFormat.PNG, 100, fOut);
+                    fOut.flush();
+                    fOut.close();
+                    file.setReadable(true, false);
+                    final Intent intent = new Intent(android.content.Intent.ACTION_SEND);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
+                    intent.setType("image/png");
+                    startActivity(Intent.createChooser(intent, "Share image via"));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
-    }
-
-    private void startShare(Bitmap b) {
-        Intent intent = new Intent(Intent.ACTION_SEND);
-        intent.setType("image/jpeg");
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        b.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
-        File file = new File(Environment.getExternalStorageDirectory()+File.separator+"shot.jpg");
-        try {
-            file.createNewFile();
-            FileOutputStream fileOutputStream = new FileOutputStream(file);
-            fileOutputStream.write(byteArrayOutputStream.toByteArray());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        intent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file:///sdcard/shot.jpg"));
-        startActivity(Intent.createChooser(intent, "share image"));
     }
 
     public void myDialogs(){
