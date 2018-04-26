@@ -370,7 +370,7 @@ public class GDB1 extends AppCompatActivity {
             public void onClick(View view) {
                 Bitmap b = Screenshot.takescreenshotOfRootview(imageView);
                 try {
-                    File file = new File(GDB1.this.getExternalCacheDir(),"GWL1share.png");
+                    File file = new File(GDB1.this.getExternalCacheDir(),"GDB1share.png");
                     FileOutputStream fOut = new FileOutputStream(file);
                     b.compress(Bitmap.CompressFormat.PNG, 100, fOut);
                     fOut.flush();
