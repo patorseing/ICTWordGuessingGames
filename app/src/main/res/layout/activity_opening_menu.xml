@@ -29,7 +29,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:layout_marginBottom="10sp">
+                android:layout_marginBottom="10sp"
+                android:visibility="gone">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -43,7 +44,7 @@
                         android:text="success or not"
                         android:textAlignment="center"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                        android:textSize="30sp" />
+                        android:textSize="30sp"/>
 
                 </LinearLayout>
             </ScrollView>
@@ -68,11 +69,11 @@
 
                     <com.facebook.login.widget.LoginButton
                         android:id="@+id/fd_login_bn"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="4"
                         android:padding="5sp"
-                        android:textSize="15sp"
+                        android:textSize="20sp"
                         app:com_facebook_login_text="Connect with FB"></com.facebook.login.widget.LoginButton>
 
                     <Button
@@ -111,18 +112,49 @@
 
                 <Button
                     android:id="@+id/guest"
-                    android:layout_width="0sp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:background="@color/ict"
                     android:padding="5sp"
                     android:text="@string/guest"
                     android:textColor="@android:color/white"
-                    android:textSize="15sp" />
+                    android:textSize="20sp" />
 
 
                 <TextView
                     android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0sp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/asoldguest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:background="@color/lightict"
+                    android:padding="5sp"
+                    android:text="@string/asguest"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp" />
+
+
+                <TextView
+                    android:id="@+id/textView6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />

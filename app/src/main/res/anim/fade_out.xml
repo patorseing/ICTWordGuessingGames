@@ -5,3 +5,6 @@
     android:fromAlpha="0.0"
     android:interpolator="@android:anim/accelerate_interpolator"
     android:toAlpha="1.0"></alpha>
+    <!--duration : time
+        fillAfter: transformation is applied after
+        interpolator: move from left to right -->

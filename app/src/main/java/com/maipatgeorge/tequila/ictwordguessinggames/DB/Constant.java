@@ -2,6 +2,13 @@ package com.maipatgeorge.tequila.ictwordguessinggames.DB;
 
 import android.provider.BaseColumns;
 
+//*******************************************************************
+// Constant
+//
+// this class is for defining variable of database that every class
+// in this project can call.
+//*******************************************************************
+
 public class Constant implements BaseColumns {
     // Table Names
     public static final String TABLE_Guest = "Guest";
@@ -23,13 +30,14 @@ public class Constant implements BaseColumns {
 
     //Category
     public static final String KEY_CAT = "cat";
+    public static String[] cat_name = new String[]{"wireless", "security", "database"};
 
     //Level
     public static final String KEY_LEVEL = "Q";
     public static final String KEY_catID = "catID";
 
     //GuestPass
-    public static final String KEY_G_ID = "g_id";
+    public static final String KEY_Gname = "guest_name";
     public static final String KEY_L_ID = "l_id";
 
     //FbuserPass

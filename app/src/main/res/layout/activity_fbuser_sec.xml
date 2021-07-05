@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".FBuserSEC"
+android:background="@color/lightgreen">
+
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_weight="2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <TextView
+            android:id="@+id/fbuser_se"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_margin="@dimen/activity_vertical_margin"
+            android:fontFamily="sans-serif-smallcaps"
+            android:text="Security"
+            android:textColor="@color/colorPrimary"
+            android:textSize="34sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+
+    <android.support.v7.widget.GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:columnCount="3"
+        app:rowCount="3"
+        android:layout_margin="20sp"
+        android:scrollbars="vertical">
+        <LinearLayout
+            android:id="@+id/fbselev1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5sp"
+            android:layout_marginBottom="50sp"
+            app:layout_rowSpan="2"
+            android:orientation="vertical"
+            app:layout_columnWeight="1">
+
+            <Button
+                android:id="@+id/fbselev11"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="1"
+                android:background="@color/loveblue"
+                android:textColor="@android:color/white"
+                android:textSize="24sp"/>
+
+            <ImageView
+                android:id="@+id/fbselev12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_check_black_24dp"
+                android:visibility="gone"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/fbselev2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5sp"
+            android:layout_marginBottom="50sp"
+            android:orientation="vertical"
+            app:layout_columnWeight="1"
+            app:layout_rowSpan="2"
+            android:visibility="gone">
+
+            <Button
+                android:id="@+id/fbselev21"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="2"
+                android:background="@color/loveblue"
+                android:textColor="@android:color/white"
+                android:textSize="24sp"/>
+
+            <ImageView
+                android:id="@+id/fbselev22"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_check_black_24dp"
+                android:visibility="gone"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/fbselev3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5sp"
+            android:layout_marginBottom="50sp"
+            android:orientation="vertical"
+            app:layout_columnWeight="1"
+            app:layout_rowSpan="2"
+            android:visibility="gone">
+
+            <Button
+                android:id="@+id/fbselev31"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="3"
+                android:background="@color/loveblue"
+                android:textColor="@android:color/white"
+                android:textSize="24sp"/>
+
+            <ImageView
+                android:id="@+id/fbselev32"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_check_black_24dp"
+                android:visibility="gone"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/fbselev4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5sp"
+            android:layout_marginBottom="50sp"
+            android:orientation="vertical"
+            app:layout_columnWeight="1"
+            app:layout_rowSpan="2"
+            android:visibility="gone">
+
+            <Button
+                android:id="@+id/fbselev41"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="4"
+                android:background="@color/loveblue"
+                android:textColor="@android:color/white"
+                android:textSize="24sp"/>
+
+            <ImageView
+                android:id="@+id/fbselev42"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_check_black_24dp"
+                android:visibility="gone"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/fbselev5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5sp"
+            android:layout_marginBottom="50sp"
+            android:orientation="vertical"
+            app:layout_columnWeight="1"
+            app:layout_rowSpan="2"
+            android:visibility="gone">
+
+            <Button
+                android:id="@+id/fbselev51"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="5"
+                android:background="@color/loveblue"
+                android:textColor="@android:color/white"
+                android:textSize="24sp"/>
+
+            <ImageView
+                android:id="@+id/fbselev52"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_check_black_24dp"
+                android:visibility="gone"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/fbselev6"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5sp"
+            android:layout_marginBottom="50sp"
+            android:orientation="vertical"
+            app:layout_columnWeight="1"
+            app:layout_rowSpan="2"
+            android:visibility="gone">
+
+            <Button
+                android:id="@+id/fbselev61"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="6"
+                android:background="@color/loveblue"
+                android:textColor="@android:color/white"
+                android:textSize="24sp"/>
+
+            <ImageView
+                android:id="@+id/fbselev62"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_check_black_24dp"
+                android:visibility="gone"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/fbselev7"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5sp"
+            android:layout_marginBottom="50sp"
+            android:orientation="vertical"
+            app:layout_columnWeight="1"
+            app:layout_rowSpan="2"
+            android:visibility="gone">
+
+            <Button
+                android:id="@+id/fbselev71"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="7"
+                android:background="@color/loveblue"
+                android:textColor="@android:color/white"
+                android:textSize="24sp"/>
+
+            <ImageView
+                android:id="@+id/fbselev72"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_check_black_24dp"
+                android:visibility="gone"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/fbselev8"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5sp"
+            android:layout_marginBottom="50sp"
+            android:orientation="vertical"
+            app:layout_columnWeight="1"
+            app:layout_rowSpan="2"
+            android:visibility="gone">
+
+            <Button
+                android:id="@+id/fbselev81"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="8"
+                android:background="@color/loveblue"
+                android:textColor="@android:color/white"
+                android:textSize="24sp" />
+
+            <ImageView
+                android:id="@+id/fbselev82"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_check_black_24dp"
+                android:visibility="gone"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/fbselev9"
+            android:layout_width="0dp"
+            android:layout_marginBottom="50sp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5sp"
+            android:orientation="vertical"
+            app:layout_columnWeight="1"
+            app:layout_rowSpan="2"
+            android:visibility="gone">
+
+            <Button
+                android:id="@+id/fbselev91"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="9"
+                android:background="@color/loveblue"
+                android:textColor="@android:color/white"
+                android:textSize="24sp"/>
+
+            <ImageView
+                android:id="@+id/fbselev92"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_check_black_24dp"
+                android:visibility="gone"/>
+        </LinearLayout>
+    </android.support.v7.widget.GridLayout>
+</LinearLayout>
+</ScrollView>
