@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".FBuserStartGame"
+    tools:showIn="@layout/app_bar_fbuser_start_game"
+    android:background="@color/lightgreen">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/activity_vertical_margin"
+            android:fontFamily="sans-serif-smallcaps"
+            android:text="Category"
+            android:textColor="@color/colorPrimary"
+            android:textSize="44sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/fb_wl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="10sp"
+            android:text="Wireless"
+            android:background="@color/orenge"
+            android:textColor="@android:color/white"
+            android:textSize="25sp"/>
+
+        <Button
+            android:id="@+id/fb_sec"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="10sp"
+            android:text="Security"
+            android:background="@color/loveblue"
+            android:textColor="@android:color/white"
+            android:textSize="25sp"/>
+
+        <Button
+            android:id="@+id/fb_db"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="10sp"
+            android:text="Database"
+            android:background="@color/purple"
+            android:textColor="@android:color/white"
+            android:textSize="25sp"/>
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

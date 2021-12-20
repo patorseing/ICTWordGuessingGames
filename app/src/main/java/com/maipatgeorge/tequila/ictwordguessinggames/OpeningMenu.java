@@ -2,7 +2,9 @@ package com.maipatgeorge.tequila.ictwordguessinggames;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -31,6 +33,7 @@ import org.json.JSONObject;
 import java.util.UUID;
 
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_FBID;
+import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_ID;
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_NAME;
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.KEY_TOKEN;
 import static com.maipatgeorge.tequila.ictwordguessinggames.DB.Constant.TABLE_Fbuser;
@@ -45,12 +48,42 @@ public class OpeningMenu extends AppCompatActivity {
     ProfileTracker profileTracker;
     Button logOut;
     Button asGuest;
+    Button asOldGuest;
 
     DBHelper helper;
+
+    MediaPlayer mysong;
+    String start;
+    int volume;
+    int pos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Intent intent = getIntent();
+
+        if (savedInstanceState == null){
+            start = intent.getStringExtra("start");
+            volume = intent.getIntExtra("volume", 0);
+            pos = intent.getIntExtra("pos", 0);
+        } else {
+            start = savedInstanceState.getString("start");
+            volume = savedInstanceState.getInt("volume");
+            pos = savedInstanceState.getInt("pos");
+        }
+
+        float reduce=(float)(100 - volume)/100;
+
+        mysong = MediaPlayer.create(OpeningMenu.this, R.raw.feelingsohappy);
+        mysong.seekTo(pos);
+        mysong.start();
+        mysong.setVolume(1 - reduce, 1 - reduce);
+        mysong.setLooping(true);
+
+        if (!start.equals("true")){
+            mysong.stop();
+        }
 
         //FacebookSdk.sdkInitialize(getApplicationContext());
         FacebookSdk.getApplicationContext();
@@ -93,36 +126,60 @@ public class OpeningMenu extends AppCompatActivity {
                 GraphRequest.newMeRequest(
                         loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
                             @Override
-                            public void onCompleted(JSONObject me, GraphResponse response) {
+                            public void onCompleted(final JSONObject me, GraphResponse response) {
                                 if (response.getError() != null) {
                                     // handle error
                                 } else {
                                     String token = loginResult.getAccessToken().getToken();
-                                    String fbUserId = me.optString("id");
-                                    String fbUserName = me.optString("name");
-                                    String fbUserProfilePics = "http://graph.facebook.com/" + fbUserId + "/picture?type=large";
-                                    textView.setText("Login Success \n" +fbUserId+"\n"+fbUserName+"\n"+fbUserProfilePics);
+                                    final String fbUserId = me.optString("id");
+                                    final String fbUserName = me.optString("name");
 
+                                    String fbcount = "SELECT * FROM "+TABLE_Fbuser+" WHERE "+KEY_FBID+" = ? ";
 
-                                    SQLiteDatabase db = helper.getWritableDatabase();
-                                    ContentValues values = new ContentValues();
-                                    values.put(KEY_FBID, fbUserId);
-                                    values.put(KEY_NAME, fbUserName);
-                                    values.put(KEY_TOKEN, token);
-                                    db.insertOrThrow(TABLE_Fbuser, null, values);
-                                    //db.close();
+                                    SQLiteDatabase db1 = helper.getReadableDatabase();
 
-                                    /*
-                                    new Handler().postDelayed(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            Intent welcome = new Intent(OpeningMenu.this, StartGame.class);
-                                            startActivity(welcome);
-                                            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                                            finish();
-                                        }
-                                    }, 10);
-                                    */
+                                    Cursor cursor = db1.rawQuery(fbcount, new String[] {fbUserId});
+
+                                    if (cursor.getCount() > 0){
+                                        new Handler().postDelayed(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                Intent welcome = new Intent(OpeningMenu.this, FBuserStartGame.class);
+                                                welcome.putExtra("name", fbUserName);
+                                                welcome.putExtra("id", fbUserId);
+                                                welcome.putExtra("start", start);
+                                                welcome.putExtra("volume", volume);
+                                                welcome.putExtra("pos", mysong.getCurrentPosition());
+                                                startActivity(welcome);
+                                                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                                                finish();
+                                            }
+                                        }, 10);
+                                    }
+                                    else {
+                                        SQLiteDatabase db2 = helper.getWritableDatabase();
+                                        ContentValues values = new ContentValues();
+                                        values.put(KEY_FBID, fbUserId);
+                                        values.put(KEY_NAME, fbUserName);
+                                        values.put(KEY_TOKEN, token);
+                                        db2.insertOrThrow(TABLE_Fbuser, null, values);
+                                        db2.close();
+
+                                        new Handler().postDelayed(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                Intent welcome = new Intent(OpeningMenu.this, FBuserStartGame.class);
+                                                welcome.putExtra("name", fbUserName);
+                                                welcome.putExtra("id", fbUserId);
+                                                welcome.putExtra("start", start);
+                                                welcome.putExtra("volume", volume);
+                                                welcome.putExtra("pos", mysong.getCurrentPosition());
+                                                startActivity(welcome);
+                                                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                                                finish();
+                                            }
+                                        }, 10);
+                                   }
                                 }
                             }
                         }).executeAsync();
@@ -157,27 +214,81 @@ public class OpeningMenu extends AppCompatActivity {
         asGuest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String name;
-                UUID uuid = UUID.randomUUID();
-                name = uuid.toString().replace("-", "").substring(0, 15);
+                final UUID uuid = UUID.randomUUID();
+                final String name = uuid.toString().replace("-", "").substring(0, 15);
                 textView.setText(name);
+
+                String sql = "DELETE FROM "+TABLE_Guest+" WHERE "+KEY_ID+" = (SELECT max("+KEY_ID+") FROM "+TABLE_Guest+")";
+
                 SQLiteDatabase db = helper.getWritableDatabase();
+                db.execSQL(sql);
                 ContentValues values = new ContentValues();
                 values.put(KEY_NAME, name);
                 db.insertOrThrow(TABLE_Guest, null, values);
                 db.close();
 
+
+
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        Intent welcome = new Intent(OpeningMenu.this, StartGame.class);
+                        Intent welcome = new Intent(OpeningMenu.this, GuestStartGame.class);
+                        welcome.putExtra("name", name);
+                        welcome.putExtra("start", start);
+                        welcome.putExtra("volume", volume);
+                        welcome.putExtra("pos", mysong.getCurrentPosition());
                         startActivity(welcome);
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         finish();
                     }
                 }, 10);
+
             }
         });
+
+        asOldGuest = findViewById(R.id.asoldguest);
+
+        asOldGuest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String guestLastQuery = "SELECT  * FROM "+TABLE_Guest+" WHERE "+KEY_ID+" = (SELECT max("+KEY_ID+") FROM "+TABLE_Guest+")";
+                SQLiteDatabase db = helper.getReadableDatabase();
+
+                Cursor cursor = db.rawQuery(guestLastQuery, null);
+
+                String id[] = new String[cursor.getCount()];
+                int i = 0;
+                if (cursor.getCount() > 0)
+                {
+                    cursor.moveToFirst();
+                    do {
+                        id[i] = cursor.getString(cursor.getColumnIndex(KEY_NAME));
+                        i++;
+                    } while (cursor.moveToNext());
+                    cursor.close();
+
+                    final String name = id[0];
+
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            Intent welcome = new Intent(OpeningMenu.this, GuestStartGame.class);
+                            welcome.putExtra("name", name);
+                            welcome.putExtra("start", start);
+                            welcome.putExtra("volume", volume);
+                            welcome.putExtra("pos", mysong.getCurrentPosition());
+                            startActivity(welcome);
+                            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                            finish();
+                        }
+                    }, 10);
+                } else {
+                    Toast.makeText(getApplicationContext(),"You don't have old guest user",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+
     }
 
     @Override
@@ -188,6 +299,7 @@ public class OpeningMenu extends AppCompatActivity {
     @Override
     protected void onResume(){
         super.onResume();
+        mysong.start();
         Profile profile = Profile.getCurrentProfile();
         nextActivity(profile);
     }
@@ -195,10 +307,12 @@ public class OpeningMenu extends AppCompatActivity {
     @Override
     protected void onPause(){
         super.onPause();
+        mysong.stop();
     }
 
     protected void onStop(){
         super.onStop();
+        mysong.stop();
         accessTokenTracker.stopTracking();
         profileTracker.stopTracking();
     }
@@ -207,5 +321,13 @@ public class OpeningMenu extends AppCompatActivity {
         if (profile != null){
             LoginManager.getInstance().logOut();
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("start", start);
+        outState.putInt("volume", volume);
+        outState.putInt("pos", mysong.getCurrentPosition());
     }
 }
